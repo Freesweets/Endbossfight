@@ -19,6 +19,7 @@ fun main() {
         280.0,
         "Punchhole",
         "Protection-Warrior",
+        false,
         true,
         'P'
     )
@@ -35,6 +36,7 @@ fun main() {
         150.5,
         "Verox",
         "Subtility-Rogue",
+        false,
         true,
         'P'
     )
@@ -51,6 +53,7 @@ fun main() {
         200.69,
         "Valen",
         "Shadow-Priest",
+        false,
         false,
         'M'
     )

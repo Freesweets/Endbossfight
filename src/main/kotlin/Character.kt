@@ -11,6 +11,7 @@ class Character(
     mDef: Double,
     name: String,
     classAndSpec: String,
+    var dot: Boolean, //Wird zu begin der Runde gecheckt. Falls true dann erleidet der Character entsprechend Schaden. Default false, wird durch Boss attac getriggert
     val meele: Boolean, // Gibt an ob der Character Nahkämpfer ist oder nicht
     val physicalOrMagic: Char // Gibt an ob der Character physische oder magische Angriffe ausführt
 ) : Hero(hp, manaOrRecource, rolle, waffentyp, whatKindOfDmg, strg, int, agi, pDef, mDef, name, classAndSpec) { // Hero vererbt seine Eigenschaften an Klasse
