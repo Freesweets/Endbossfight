@@ -5,6 +5,7 @@ fun main() {
         3 to "AGI Buff-Potion",
         4 to "INT Buff- Potion"
     )
+
     var hero1: Character = Character(
         1200,
         "Wut" to 100,
