@@ -10,6 +10,7 @@ open class Hero(
     var pDef: Double, // Gibt die physische Defensive eines Characters an
     var mDef: Double, // Gibt die magische Defensive eines Characters an
     val name: String, // Name des Characters
+    var thread: Int,
     val classAndSpec: String // Gibt die Klasse und Speziallisierung des Characters an zB. Subtility-Rogue, Fire-Mage usw
 ) {
     open fun attack1() {
@@ -35,5 +36,44 @@ open class Hero(
         var dmg = attacke4.random()
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
     }
-
+    open fun attack5() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
+    open fun attack6() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
+    open fun attack7() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
+    open fun attack8() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
+    open fun attack9() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
+    open fun attack10() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
+    open fun attack11() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
+    open fun attack12() {
+        var attacke4 = 100..250
+        var dmg = attacke4.random()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    }
 }
