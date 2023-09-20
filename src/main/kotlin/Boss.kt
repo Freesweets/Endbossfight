@@ -10,4 +10,5 @@ class Boss(
     type: String,
     protected var recource: Pair<String, Int>
 ) : Enemy(hp, whatKindOfDmg, strg, int, agi, pDef, mDef, name, type) {
+
 }
