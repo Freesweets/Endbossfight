@@ -1,3 +1,5 @@
+import kotlin.concurrent.thread
+
 fun main() {
     var inventory: Map<Int, String> = mapOf(
         1 to "Heal Potion",
@@ -5,34 +7,35 @@ fun main() {
         3 to "AGI Buff-Potion",
         4 to "INT Buff- Potion"
     )
-
+    var threadList: MutableMap<String, Int> = mutableMapOf()
     var hero1: Character = Character(
-        1200,
-        "Wut" to 100,
+        7800,
+        0,
         "Tank",
         "1H Axt" to "Schild",
         "Waffenschaden/Blutung",
-        75.0,
+        68.0,
         15.0,
-        50,
+        25.0,
         450.8,
         280.0,
-        "Punchhole",
+        "Schanzentor",
         30,
         "Protection-Warrior",
         false,
         true,
         'P'
     )
+    threadList.put(hero1.name, hero1.thread)
     var hero2: Character = Character(
-        650,
-        "Energy" to 150,
+        4200,
+        150,
         "DPS",
         "1H Schwert" to "Dolch",
         "Poison/Bleed/Shadow",
         40.0,
-        30.0,
-        95,
+        35.0,
+        95.0,
         235.5,
         150.5,
         "Verox",
@@ -42,26 +45,28 @@ fun main() {
         true,
         'P'
     )
+    threadList.put(hero2.name, hero2.thread)
     var hero3: Character = Character(
-        590,
-        "Mana" to 1500,
+        3800,
+        2500,
         "DPS/Off-Heal",
         "Main-Hand" to "Off-Hand",
         "Shadow/Holy",
         10.0,
         98.0,
-        12,
+        12.0,
         130.8,
         200.69,
-        "Valen",
+        "Stardusk",
         12,
         "Shadow-Priest",
         false,
         false,
         'M'
     )
+    threadList.put(hero3.name, hero3.thread)
     var boss: Boss = Boss(
-        6500,
+        20000,
         "Fire/Physical",
         400,
         420,
@@ -84,6 +89,6 @@ fun main() {
         "Elemental",
         true
     )
-    hero1.attack1()
+
 
 }
