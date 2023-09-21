@@ -12,8 +12,6 @@ class Character(
     name: String,
     thread: Int,
     classAndSpec: String,
-    var dot: Boolean, //Wird zu begin der Runde gecheckt. Falls true dann erleidet der Character entsprechend Schaden. Default false, wird durch Boss attac getriggert
-    val meele: Boolean, // Gibt an ob der Character Nahkämpfer ist oder nicht
     val physicalOrMagic: Char // Gibt an ob der Character physische oder magische Angriffe ausführt
 ) : Hero(
     hp,
@@ -34,6 +32,9 @@ class Character(
         false // ein boolinischer Wert der besagt ob die Ability "Sinister Stike" eingesetzt wurde oder nicht. Default false
     var newManaValue = manaOrRecource
     var newThread = thread
+    fun isAlive(): Boolean{
+        return hp > 0
+    }
 
     override fun rogueAction1() { // Damage Ability namens "Sinister Strike". Var ssUsed wird nach einsatz auf true gesetzt.
         val attackName = "Sinister Strike"
@@ -132,8 +133,6 @@ class Character(
                 "Schanzentor",
                 30,
                 "Protection-Warrior",
-                false,
-                true,
                 'P'
             )
 
@@ -151,8 +150,6 @@ class Character(
                 "Verox",
                 10,
                 "Subtility-Rogue",
-                false,
-                true,
                 'P'
             )
 
@@ -170,8 +167,6 @@ class Character(
                 "Stardusk",
                 12,
                 "Shadow-Priest",
-                false,
-                false,
                 'M'
             )
             else -> {
@@ -203,7 +198,7 @@ class Character(
 
     override fun tankActiion2() { //Heal Ability
         val attackName = "Last man standing"
-        if (hp < 2500 && manaOrRecource == 50) { //bedingung zum einsetzten der Ability ist dass der Hero weniger als 2,5k hp hat und mehr als 50 Wut
+        if (hp < 2500 || manaOrRecource == 50) { //bedingung zum einsetzten der Ability ist dass der Hero weniger als 2,5k hp hat und mehr als 50 Wut
             hp = 7800 // setzt die HP des Heros auf den festgelegten Wert
             println("$name setzt $attackName ein um sich wieder auf 100% zu heilen")
             newManaValue - 50 // verbraucht Wut als recource
@@ -212,19 +207,21 @@ class Character(
         }
     }
 
-    override fun tankAction3() { //Simple damage Ability mit Strengh Multiplikator
+    override fun tankAction3() : Double { //Simple damage Ability mit Strengh Multiplikator
         val attackName = "Heroic Strike"
         var heroicStrike = 15..18
         var dmg = heroicStrike.random() * strg
         newManaValue + 15
         println("$name setzt $attackName ein und fügt Ragnaros $dmg zu")
+        return dmg
     }
 
-    override fun tankAction4() { // AE Ability (Area Effect) die dmg verursacht mit agi und int Multiplikator
+    override fun tankAction4(): Double { // AE Ability (Area Effect) die dmg verursacht mit agi und int Multiplikator
         val attackName = "Thunderclap"
         var thunderclap = 1..2
         var dmg = thunderclap.random() * agi * int
         newManaValue + 20 // erhöht den Thread des Heros um 20
         println("$name setzt $attackName ein verursacht damit $dmg an allen Gegnern")
+        return dmg
     }
 }

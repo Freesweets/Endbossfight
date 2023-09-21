@@ -9,7 +9,7 @@ open class Hero(
     var agi: Double, // Gibt den Beweglichkeitswert eines Charakers an
     var pDef: Double, // Gibt die physische Defensive eines Characters an
     var mDef: Double, // Gibt die magische Defensive eines Characters an
-    val name: String, // Name des Characters
+    open val name: String, // Name des Characters
     var thread: Int, // gibt an wie hoch die "Aggro" des Characters ist und wie hoch die chance ist von Ragnaros angegriffen zu werden
     val classAndSpec: String // Gibt die Klasse und Speziallisierung des Characters an zB. Subtility-Rogue, Fire-Mage usw
 ) {
@@ -66,14 +66,16 @@ open class Hero(
         var dmg = attacke4.random()
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
     }
-    open fun tankAction3() {
+    open fun tankAction3() : Double {
         var attacke4 = 100..250
-        var dmg = attacke4.random()
+        var dmg = attacke4.random().toDouble()
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+        return dmg
     }
-    open fun tankAction4() {
+    open fun tankAction4() :Double {
         var attacke4 = 100..250
-        var dmg = attacke4.random()
+        var dmg = attacke4.random().toDouble()
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+        return dmg
     }
 }

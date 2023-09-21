@@ -1,5 +1,4 @@
-import kotlin.concurrent.thread
-
+var dot: Boolean = false //Wird zu begin der Runde gecheckt. Falls true dann erleidet der Character entsprechend Schaden. Default false, wird durch Boss attac getriggert
 fun main() {
     var inventory: Map<Int, String> = mapOf(
         1 to "Heal Potion",
@@ -22,8 +21,6 @@ fun main() {
         "Schanzentor",
         30,
         "Protection-Warrior",
-        false,
-        true,
         'P'
     )
     threadList.put(hero1.name, hero1.thread)
@@ -41,8 +38,6 @@ fun main() {
         "Verox",
         10,
         "Subtility-Rogue",
-        false,
-        true,
         'P'
     )
     threadList.put(hero2.name, hero2.thread)
@@ -60,8 +55,6 @@ fun main() {
         "Stardusk",
         12,
         "Shadow-Priest",
-        false,
-        false,
         'M'
     )
     threadList.put(hero3.name, hero3.thread)
@@ -75,7 +68,7 @@ fun main() {
         650,
         "Ragnaros the Firelord",
         "Elemental",
-        "Fire Energy" to 100
+        0
     )
     var minion: Minion = Minion(
         100,
@@ -89,6 +82,67 @@ fun main() {
         "Elemental",
         true
     )
+    val heroes: List<Character> = listOf(hero1, hero2, hero3)
+    var round = 1
+    var gameOver = false
+    var input = readln().toIntOrNull()
+    var newBossHp = boss.hp
+    println("Die 3 Helden haben sich bis zu Ragnaros dem Feuerlord vorgekämpft")
+    /* while (!gameOver){
+        println("$round.Runde")
+        println("------")
+        for (hero in heroes){
+            if (boss.isAlive()){
+                var dmg = hero1.tankAction1(boss.hp)
+            }
+        }
+    }
 
+    do{
+        println("Was willst du tun?")
+        println("1 -> Tank Aktion wählen")
+        println("2 -> Rogue Aktion wählen")
+        println("3 -> Priest Aktion wählen")
+    } while (){
 
+    }
+
+     */
+    println("Was willst du tun?")
+    println("1 -> Tank Aktion wählen")
+    println("2 -> Rogue Aktion wählen")
+    println("3 -> Priest Aktion wählen")
+    if (input == 1){
+        println("""
+            Tank aktionen:
+            1 -> Taunt (erhöht deinen Thread und erzeugt 15 Wut)
+            2 -> Last man standing (Verbraucht 50 Wut oder ist kostenlos falls deine HP unter 2500 liegt. Heilt dich auf 7800 HP)
+            3 -> Heroic Strike (verursacht moderaten Schaden und erzeugt 15 Wut)
+            4 -> Thunderclap (verursacht moderaten Schaden an allen Gegnern und erzeugt 20 Wut)
+        """.trimIndent())
+        if (input == 1){
+            hero1.tankAction1()
+        }else if (input == 2){
+            hero1.tankActiion2()
+        }else if (input == 3){
+            boss.hp - hero1.tankAction3()
+        }else if (input == 4){
+            newBossHp -= hero1.tankAction4()
+        }
+    }else if (input == 2){
+        println("""
+            Rogue aktionen:
+            1 -> Sinister Stiker (verursacht moderaten Schaden. Koster 15 Energy)
+            2 -> Ambush (verursacht hohen Schaden. Der angerichtete Schaden wird erhöht falls in der Runde zuvor Sinister Strike eingesetzt wurde: WOMBO COMBO! - Kostet 25 Energy)
+            3 -> Shadow Strike (hoher Schaden. Setzt verursachten Schaden von physisch zu magisch und vice versa. Sollte der Schaden bereits auf magisch eingestellt sein- verursacht Shadow Strike Bonusschaden und kostet keine Energy)
+            4 -> Tricks of the trade (geringer Schaden. Reduziert den Thread des Rogues und erhöht den Thread des Tanks)
+        """.trimIndent())
+    }else if (input == 3){
+        println("""
+            1 -> Mind Blast (hoher Schaden. Kostet 250 Mana)
+            2 -> Fade (reduziert den Thread des Priesters auf 0)
+            3 -> Power Word: Shield (wählt ein Gruppenmitglied aus. Das gewählte Ziel erhält im nächsten Zug keinen Schaden)
+            4 -> Mass Dispel (entfernt einen damage over time effekt)
+        """.trimIndent())
+    }
 }
