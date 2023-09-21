@@ -146,6 +146,8 @@ fun main() {
         """.trimIndent()
             )
         }
+
+
         gameOver = !(boss.hp > 0 && (hero1.hp >= 0 || hero2.hp >= 0 || hero3.hp >= 0))
 
     }
