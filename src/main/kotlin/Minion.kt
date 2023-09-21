@@ -1,13 +1,9 @@
 class Minion(
-    hp: Int,
-    whatKindOfDmg: String,
+    hp: Double,
     strg: Int,
     int: Int,
     agi: Int,
-    pDef: Int,
-    mDef: Int,
     name: String,
-    type: String,
     var explode: Boolean
-) : Enemy(hp, whatKindOfDmg, strg, int, agi, pDef, mDef, name, type) {
+) : Enemy(hp, strg, int, agi, name) {
 }

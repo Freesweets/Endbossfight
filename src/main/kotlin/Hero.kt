@@ -13,6 +13,12 @@ open class Hero(
     var thread: Int, // gibt an wie hoch die "Aggro" des Characters ist und wie hoch die chance ist von Ragnaros angegriffen zu werden
     val classAndSpec: String // Gibt die Klasse und Speziallisierung des Characters an zB. Subtility-Rogue, Fire-Mage usw
 ) {
+    var inventoryVariable: Map<Int, String> = mapOf(
+        1 to "Heal Potion",
+        2 to "STR Buff- Potion",
+        3 to "AGI Buff-Potion",
+        4 to "INT Buff- Potion"
+    )
     open fun rogueAction1() {
         var attacke1 = 100..250
         var dmg = attacke1.random()
@@ -77,5 +83,12 @@ open class Hero(
         var dmg = attacke4.random().toDouble()
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
         return dmg
+    }
+    var input = readln().toIntOrNull()
+    open fun inventory(){
+    when (inventoryVariable){
+
+    }
+
     }
 }

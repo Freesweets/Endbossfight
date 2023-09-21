@@ -196,7 +196,7 @@ class Character(
         println("$name´s Wut steigt um 10 und beträgt nun $newManaValue")
     }
 
-    override fun tankActiion2() { //Heal Ability
+    override fun tankActiion2() { //Heal def cd Ability
         val attackName = "Last man standing"
         if (hp < 2500 || manaOrRecource == 50) { //bedingung zum einsetzten der Ability ist dass der Hero weniger als 2,5k hp hat und mehr als 50 Wut
             hp = 7800 // setzt die HP des Heros auf den festgelegten Wert
@@ -224,4 +224,5 @@ class Character(
         println("$name setzt $attackName ein verursacht damit $dmg an allen Gegnern")
         return dmg
     }
+
 }

@@ -1,18 +1,14 @@
 class Boss(
-    hp: Int,
-    whatKindOfDmg: String,
+    hp: Double,
     strg: Int,
     int: Int,
     agi: Int,
-    pDef: Int,
-    mDef: Int,
     name: String,
-    type: String,
-    protected var recource: Int
-) : Enemy(hp, whatKindOfDmg, strg, int, agi, pDef, mDef, name, type) {
+    var recource: Int
+) : Enemy(hp, strg, int, agi, name) {
     var newRecource = recource
     var empoweredSulfuras = false
-    open var abgetaucht = false
+    var abgetaucht = false
     fun isAlive(): Boolean{
         return hp > 0
     }
