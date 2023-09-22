@@ -1,9 +1,6 @@
 open class Hero(
     var hp: Int, //gibt Healthpoints an
     var manaOrRecource: Int, //gibt an welche Recource verwendet wird: Mana, Wut, Energy und Menge
-    val rolle: String, // Gibt Rolle an Tank/Healer/DPS
-    val waffentyp: Pair<String, String>, // Waffenart: z.B 1H Schwert, Stab, Dolch, 2H Hammer usw...
-    val whatKindOfDmg: String, // Fire, Frost, Arcane, Holy, Bleed, Poison usw...
     var strg: Double, // Gibt den Stärkewert eines Characters an
     var int: Double, // Gibt den Intilligenzwert eines Characters an
     var agi: Double, // Gibt den Beweglichkeitswert eines Charakers an
@@ -11,7 +8,6 @@ open class Hero(
     var mDef: Double, // Gibt die magische Defensive eines Characters an
     open val name: String, // Name des Characters
     var thread: Int, // gibt an wie hoch die "Aggro" des Characters ist und wie hoch die chance ist von Ragnaros angegriffen zu werden
-    val classAndSpec: String // Gibt die Klasse und Speziallisierung des Characters an zB. Subtility-Rogue, Fire-Mage usw
 ) {
     var inventoryVariable: Map<Int, String> = mapOf(
         1 to "Heal Potion",
@@ -19,33 +15,38 @@ open class Hero(
         3 to "AGI Buff-Potion",
         4 to "INT Buff- Potion"
     )
-    open fun rogueAction1() {
+    open fun rogueAction1(): Double {
         var attacke1 = 100..250
-        var dmg = attacke1.random()
+        var dmg = attacke1.random().toDouble()
         println("$name setzt $attacke1 ein und fügt Ragnaros $dmg zu!")
+        return dmg
     }
 
-    open fun rogueAction2() {
+    open fun rogueAction2(): Double {
         var attacke2 = 100..250
-        var dmg = attacke2.random()
+        var dmg = attacke2.random().toDouble()
         println("$name setzt $attacke2 ein und fügt Ragnaros $dmg zu!")
+    return dmg
     }
 
-    open fun rogueAction3() {
+    open fun rogueAction3(): Double {
         var attacke3 = 100..250
-        var dmg = attacke3.random()
+        var dmg = attacke3.random().toDouble()
         println("$name setzt $attacke3 ein und fügt Ragnaros $dmg zu!")
+    return dmg
     }
 
-    open fun rogueAction4() {
+    open fun rogueAction4(): Double {
         var attacke4 = 100..250
-        var dmg = attacke4.random()
+        var dmg = attacke4.random().toDouble()
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    return dmg
     }
-    open fun spAction1() {
+    open fun spAction1(): Double {
         var attacke4 = 100..250
-        var dmg = attacke4.random()
+        var dmg = attacke4.random().toDouble()
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+    return dmg
     }
     open fun spAction2() {
         var attacke4 = 100..250
@@ -84,7 +85,6 @@ open class Hero(
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
         return dmg
     }
-    var input = readln().toIntOrNull()
     open fun inventory(){
     when (inventoryVariable){
 

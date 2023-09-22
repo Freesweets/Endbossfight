@@ -3,12 +3,9 @@ var dot: Boolean =
 
 fun main() {
     var threadList: MutableMap<String, Int> = mutableMapOf()
-    var hero1: Character = Character(
+    var hero1: Tank = Tank(
         7800,
         0,
-        "Tank",
-        "1H Axt" to "Schild",
-        "Waffenschaden/Blutung",
         68.0,
         15.0,
         25.0,
@@ -16,16 +13,12 @@ fun main() {
         280.0,
         "Schanzentor",
         30,
-        "Protection-Warrior",
-        'P'
+
     )
     threadList.put(hero1.name, hero1.thread)
-    var hero2: Character = Character(
+    var hero2: Rogue = Rogue(
         4200,
         150,
-        "DPS",
-        "1H Schwert" to "Dolch",
-        "Poison/Bleed/Shadow",
         40.0,
         35.0,
         95.0,
@@ -33,25 +26,19 @@ fun main() {
         150.5,
         "Verox",
         10,
-        "Subtility-Rogue",
         'P'
     )
     threadList.put(hero2.name, hero2.thread)
-    var hero3: Character = Character(
+    var hero3: Priest = Priest(
         3800,
         2500,
-        "DPS/Off-Heal",
-        "Main-Hand" to "Off-Hand",
-        "Shadow/Holy",
         10.0,
         98.0,
         12.0,
         130.8,
         200.69,
         "Stardusk",
-        12,
-        "Shadow-Priest",
-        'M'
+        10
     )
     threadList.put(hero3.name, hero3.thread)
     var boss: Boss = Boss(
@@ -63,7 +50,7 @@ fun main() {
         0
     )
     var minion: Minion = Minion(
-        100,
+        100.0,
         30,
         5,
         5,
@@ -71,39 +58,55 @@ fun main() {
         true
 
     )
-    val heroes: List<Character> = listOf(hero1, hero2, hero3)
+    val heroes: List<Hero> = listOf(hero1,hero2, hero3)
     var round = 1
     var gameOver = false
-    var input = readln().toIntOrNull()
-
-    println("Die 3 Helden haben sich bis zu Ragnaros dem Feuerlord vorgekämpft")
-    while (!gameOver) {
-        println("$round.Runde")
-        println("------")
-        for (hero in heroes) {
-            if (boss.isAlive()) {
-                var dmg = hero1.tankAction1(boss.hp)
-            }
-        }
-    }
-
-    do {
-        println("Was willst du tun?")
-        println("1 -> Tank Aktion wählen")
-        println("2 -> Rogue Aktion wählen")
-        println("3 -> Priest Aktion wählen")
-    } while (!gameOver)
 
 
+    /* println("Die 3 Helden haben sich bis zu Ragnaros dem Feuerlord vorgekämpft")
+     while (!gameOver) {
+         println("$round.Runde")
+         println("------")
+         for (hero in heroes) {
+             if (boss.isAlive()) {
+                 var dmg = hero1.tankAction1(boss.hp)
+             }
+         }
+     }
 
-    while (!gameOver) {
-        println("Was willst du tun?")
-        println("1 -> Tank Aktion wählen")
-        println("2 -> Rogue Aktion wählen")
-        println("3 -> Priest Aktion wählen")
-        if (input == 1) {
-            println(
-                """
+     do {
+         println("Was willst du tun?")
+         println("1 -> Tank Aktion wählen")
+         println("2 -> Rogue Aktion wählen")
+         println("3 -> Priest Aktion wählen")
+     } while (!gameOver)
+
+
+     */
+    println( //println zu Begninn des Spiels
+        """
+        Die 3 Helden haben sich bis zu Ragnaros dem Feuerlord vorgekämpft. 
+        Majordomus Exekutus sieht die Helden in der Ferne. Aus Panik versucht er Ragnaros zu beschwören bevor es zu spät ist...
+        Ragnaros: TOO SOON!! YOU SUMMONED ME TOO SOON!! YOU WILL DIE FOR YOUR MUSTAKES MAJORDOMUS!
+        Ragnaros erschlägt Majordomus mit Sulfuras und wendet sich den Helden zu....
+    """.trimIndent()
+    )
+
+    while (round < 10) { //readln Optionen für den Spieler
+        println(
+            """
+        Was willst du tun?
+        1 -> Tank Aktion wählen
+        2 -> Rogue Aktion wählen
+        3 -> Priest Aktion wählen
+        """.trimIndent()
+        )
+        var input = readln().toIntOrNull()
+        if (input == 1) { //Aktion des Spilers
+            var input1: Int? = null
+            while (input1 == null) {
+                println(
+                    """
             Tank Aktionen:
             1 -> Taunt (erhöht deinen Thread und erzeugt 15 Wut)
             2 -> Last man standing (Verbraucht 50 Wut oder ist kostenlos falls deine HP unter 2500 liegt. Heilt dich auf 7800 HP)
@@ -111,19 +114,23 @@ fun main() {
             4 -> Thunderclap (verursacht moderaten Schaden an allen Gegnern und erzeugt 20 Wut)
             5 -> Inventar
         """.trimIndent()
-            )
-            if (input == 1) {
-                hero1.tankAction1()
-            } else if (input == 2) {
-                hero1.tankActiion2()
-            } else if (input == 3) {
-                boss.hp = boss.hp - hero1.tankAction3()
-            } else if (input == 4) {
-                boss.hp = boss.hp - hero1.tankAction4()
-            } else if (input == 5) {
-                hero1.inventory()
+                )
+                input1 = readln().toIntOrNull()
+                if (input1 == 1) { //Aktion des Spilers
+                    hero1.tankAction1()
+                } else if (input1 == 2) {
+                    hero1.tankActiion2()
+                } else if (input1 == 3) {
+                    boss.hp = boss.hp - hero1.tankAction3()
+                } else if (input1 == 4) {
+                    boss.hp = boss.hp - hero1.tankAction4()
+                } else if (input1 == 5) {
+                    hero1.inventory()
+                } else {
+                    input1 = null
+                }
             }
-        } else if (input == 2) {
+        } else if (input == 2) { //Aktion des Spilers
             println(
                 """
             Rogue Aktionen:
@@ -134,7 +141,23 @@ fun main() {
             5 -> Inventar
         """.trimIndent()
             )
-        } else if (input == 3) {
+            var input2: Int? = null
+            input2 = readln().toIntOrNull()
+            if (input2 == 1) { //Aktion des Spilers
+                boss.hp = boss.hp - hero2.rogueAction1()
+            } else if (input2 == 2) {
+                boss.hp = boss.hp - hero2.rogueAction2()
+            } else if (input2 == 3) {
+                boss.hp = boss.hp - hero2.rogueAction3()
+            } else if (input2 == 4) {
+                boss.hp = boss.hp - hero2.rogueAction4()
+            } else if (input2 == 5) {
+                hero2.inventory()
+            }else {
+                input2 = null
+            }
+
+        } else if (input == 3) { //Aktion des Spilers
             println(
                 """
             Priest Aktionen:        
@@ -145,10 +168,23 @@ fun main() {
             5 -> Inventar
         """.trimIndent()
             )
+            var input3: Int? = null
+            input3 = readln().toIntOrNull()
+            if (input3 == 1) { //Aktion des Spilers
+                boss.hp = boss.hp - hero3.spAction1()
+            } else if (input3 == 2) {
+                hero3.spAction2()
+            } else if (input3 == 3) {
+                hero3.spAction3()
+            } else if (input3 == 4) {
+                hero3.spAction4()
+            }else {
+                input3 = null
+            }
         }
-
-
-        gameOver = !(boss.hp > 0 && (hero1.hp >= 0 || hero2.hp >= 0 || hero3.hp >= 0))
-
+        round++
+        println("$round. Runde")
+        gameOver =
+            !(boss.hp > 0 && (hero1.hp >= 0 || hero2.hp >= 0 || hero3.hp >= 0)) //Bedingungen für das abschliessen des Spiels
     }
 }
