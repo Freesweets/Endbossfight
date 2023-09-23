@@ -19,6 +19,9 @@ open class Enemy(
         return dmg
     }
 
+
+
+
     open fun enemyAction3(): Int {
         val attackName = "Attack 1"
         var attack1 = 1..10
