@@ -172,6 +172,7 @@ fun main() {
         } else {
             priestInput = null
         }
+        boss.bossActionList.random()
     }
     round++
     println("$round. Runde")

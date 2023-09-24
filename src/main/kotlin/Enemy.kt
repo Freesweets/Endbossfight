@@ -19,9 +19,6 @@ open class Enemy(
         return dmg
     }
 
-
-
-
     open fun enemyAction3(): Int {
         val attackName = "Attack 1"
         var attack1 = 1..10
@@ -42,12 +39,10 @@ open class Enemy(
         var dmg = attack1.random() * agi
     }
 
-    open fun enemyAction6() : Int {
+    open fun enemyAction6(): Int {
         val attackName = "Attack 1"
         var attack1 = 1..10
         var dmg = attack1.random() * agi
         return dmg
     }
-
-
 }

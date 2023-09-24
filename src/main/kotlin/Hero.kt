@@ -4,8 +4,8 @@ open class Hero(
     var strg: Double, // Gibt den Stärkewert eines Characters an
     var int: Double, // Gibt den Intilligenzwert eines Characters an
     var agi: Double, // Gibt den Beweglichkeitswert eines Charakers an
-    var pDef: Double, // Gibt die physische Defensive eines Characters an
-    var mDef: Double, // Gibt die magische Defensive eines Characters an
+    open var pDef: Double, // Gibt die physische Defensive eines Characters an
+    open var mDef: Double, // Gibt die magische Defensive eines Characters an
     open val name: String, // Name des Characters
     var thread: Int, // gibt an wie hoch die "Aggro" des Characters ist und wie hoch die chance ist von Ragnaros angegriffen zu werden
 ) {

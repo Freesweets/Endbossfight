@@ -87,4 +87,12 @@ class Boss(
             return enemyAction1()
         }
     }
+    open var bossActionList = listOf(
+        ::enemyAction1,
+        ::enemyAction2,
+        ::enemyAction3,
+        ::enemyAction4,
+        ::enemyAction5,
+        ::enemyAction6
+    )
 }
