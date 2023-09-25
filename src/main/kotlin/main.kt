@@ -64,7 +64,6 @@ fun main() {
     var round = 1
     var gameOver = false
 
-
     fun bossAttackRandom(): (Hero) -> Any { //greift auf eine zufällige Aktion des Bosses zu und führt diese aus
         var action = boss.bossActionList.random()
         return action
@@ -172,6 +171,15 @@ fun main() {
         val target = chooseTarget()
         val bossAttacke = bossAttackRandom()
         bossAttacke(target)
+        /*fun extraMove() {
+            var dice = 1..10
+            var wurf = dice.random()
+            if (wurf == 1){
+                bossAttacke(target)
+            }
+        }
+
+         */
         round++
         println("$round. Runde")
     }

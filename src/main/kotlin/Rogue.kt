@@ -75,4 +75,10 @@ class Rogue(
         }
         //return rogueAction3()
     }
+    override fun rogueAction4(): Double {
+        var attacke4 = 100..250
+        var dmg = attacke4.random().toDouble()
+        println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
+        return dmg
+    }
 }

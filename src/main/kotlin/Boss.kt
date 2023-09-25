@@ -54,7 +54,7 @@ class Boss(
     override fun enemyAction4(hero: Hero) { // dot effect. Jede Runde erleidet der Hero Schaden
         val attackName = "Living Meteor"
         var livingMeteor = 20..80
-        var dmg = livingMeteor.random()
+        var dmg = livingMeteor.random() * 5
         println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu")
         newRecource + 15
         dot = true
@@ -64,14 +64,14 @@ class Boss(
     override fun enemyAction5(hero: Hero) { // Taucht ab um sich zu schützen
         val attackName = "Abtauchen"
         if (abgetaucht == false) {
-            println("Ragnaros taucht in die Lava ein")
+            println("Ragnaros saugt die Lava um Ihn herum auf")
             abgetaucht = true
             newRecource + 25
         } else if (abgetaucht == true) { // Falls bereits abgetaucht, erhöht die Stats strg und int um jeweils 10
-            println("Ragnaros kommt aus seinem Lava hervor mit neuer Energie")
+            println("Ragnaros entlädt seine Energie und erhöht seine Stärke und Initligenz um 100")
             abgetaucht = false // setzt abgetaucht wieder auf false
-            strg + 10
-            int + 10
+            strg + 100
+            int + 100
             newRecource + 25
         }
     }
@@ -87,6 +87,12 @@ class Boss(
             hero.hp = newHp
         } else {
             println("EIN FEHLER IM CODE! Ich greif einfach noch mal an! HAHA")
+            val attackName = "Lava Burst"
+            var lavaBurst = 1..5
+            var dmg = (lavaBurst.random() * int) /2
+            newRecource + 15 //nach einsatz der Ability wird die Recource um 15 erhöht
+            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name} $dmg Schaden zu")
+            hero.hp -= dmg
         }
     }
 
