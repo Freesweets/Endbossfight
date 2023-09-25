@@ -1,5 +1,5 @@
 open class Hero(
-    var hp: Int, //gibt Healthpoints an
+    open var hp: Int, //gibt Healthpoints an
     var manaOrRecource: Int, //gibt an welche Recource verwendet wird: Mana, Wut, Energy und Menge
     var strg: Double, // Gibt den Stärkewert eines Characters an
     var int: Double, // Gibt den Intilligenzwert eines Characters an

@@ -86,7 +86,7 @@ class Priest(
                 spAction3()
             }
         }
-        println("$name setzt $attackName auf ${readln()} ein")
+        println("$name setzt $attackName auf  ein")
     }
 
     override fun spAction4() { // DoT (damage over time) remove

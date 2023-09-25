@@ -5,44 +5,44 @@ open class Enemy(
     var agi: Int,
     val name: String
 ) {
-    open fun enemyAction1(): Int {
+    open fun enemyAction1(hero: Hero) {
         val attackName = "Attack 1"
         var attack1 = 1..10
         var dmg = attack1.random() * agi
-        return dmg
+        hero.hp -= dmg
     }
 
-    open fun enemyAction2(): Int {
-        val attackName = "Attack 1"
+    open fun enemyAction2(hero: Hero){
+        val attackName = "Attack 2"
         var attack1 = 1..10
         var dmg = attack1.random() * agi
-        return dmg
+        hero.hp -= dmg
     }
 
-    open fun enemyAction3(): Int {
-        val attackName = "Attack 1"
+    open fun enemyAction3(hero: Hero) {
+        val attackName = "Attack 3"
         var attack1 = 1..10
         var dmg = attack1.random() * agi
-        return dmg
+        hero.hp -= dmg
     }
 
-    open fun enemyAction4(): Int {
-        val attackName = "Attack 1"
+    open fun enemyAction4(hero: Hero) {
+        val attackName = "Attack 4"
         var attack1 = 1..10
         var dmg = attack1.random() * agi
-        return dmg
+        hero.hp -= dmg
     }
 
-    open fun enemyAction5() {
-        val attackName = "Attack 1"
+    open fun enemyAction5(hero: Hero) {
+        val attackName = "Attack 5"
         var attack1 = 1..10
         var dmg = attack1.random() * agi
     }
 
-    open fun enemyAction6(): Int {
-        val attackName = "Attack 1"
+    open fun enemyAction6(hero: Hero) {
+        val attackName = "Attack 6"
         var attack1 = 1..10
         var dmg = attack1.random() * agi
-        return dmg
+        hero.hp -= dmg
     }
 }

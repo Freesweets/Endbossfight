@@ -1,8 +1,10 @@
+import kotlin.concurrent.thread
+
 var dot: Boolean =
     false //Wird zu begin der Runde gecheckt. Falls true dann erleidet der Character entsprechend Schaden. Default false, wird durch Boss attac getriggert
 
 fun main() {
-    var threadList: MutableMap<String, Int> = mutableMapOf()
+
     var hero1: Tank = Tank(
         7800,
         0,
@@ -15,7 +17,7 @@ fun main() {
         30,
 
         )
-    threadList.put(hero1.name, hero1.thread)
+
     var hero2: Rogue = Rogue(
         4200,
         150,
@@ -28,7 +30,7 @@ fun main() {
         10,
         'P'
     )
-    threadList.put(hero2.name, hero2.thread)
+
     var hero3: Priest = Priest(
         3800,
         2500,
@@ -40,9 +42,9 @@ fun main() {
         "Stardusk",
         10
     )
-    threadList.put(hero3.name, hero3.thread)
+
     var boss: Boss = Boss(
-        20000.0,
+        30000.0,
         400,
         420,
         400,
@@ -63,26 +65,15 @@ fun main() {
     var gameOver = false
 
 
-    /* println("Die 3 Helden haben sich bis zu Ragnaros dem Feuerlord vorgekämpft")
-     while (!gameOver) {
-         println("$round.Runde")
-         println("------")
-         for (hero in heroes) {
-             if (boss.isAlive()) {
-                 var dmg = hero1.tankAction1(boss.hp)
-             }
-         }
-     }
+    fun bossAttackRandom(): (Hero)-> Any { //greift auf eine zufällige Aktion des Bosses zu und führt diese aus
+        var action = boss.bossActionList.random()
+        return action
+    }
+    fun chooseTarget(): Hero { //bestimmt das Ziel des Angriffes. Das Ziel ist immer der Hero mit dem höchstes Thread Wert
+        var target = group.maxBy { it.thread }
+        return target
+    }
 
-     do {
-         println("Was willst du tun?")
-         println("1 -> Tank Aktion wählen")
-         println("2 -> Rogue Aktion wählen")
-         println("3 -> Priest Aktion wählen")
-     } while (!gameOver)
-
-
-     */
     if (!(boss.hp > 0 && (hero1.hp >= 0 || hero2.hp >= 0 || hero3.hp >= 0))) {
         gameOver = true
     } //Bedingungen für das abschliessen des Spiels
@@ -115,8 +106,10 @@ fun main() {
             hero1.tankActiion2()
         } else if (warriorInput == 3) {
             boss.hp = boss.hp - hero1.tankAction3()
+            println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (warriorInput == 4) {
             boss.hp = boss.hp - hero1.tankAction4()
+            println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (warriorInput == 5) {
             hero1.inventory()
         } else {
@@ -134,15 +127,18 @@ fun main() {
         """.trimIndent()
         )
         var rogueInput: Int? = readln().toIntOrNull() // Aktion des Spielers
-        rogueInput = readln().toIntOrNull()
         if (rogueInput == 1) { //Aktion des Spilers
             boss.hp = boss.hp - hero2.rogueAction1()
+            println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 2) {
             boss.hp = boss.hp - hero2.rogueAction2()
+            println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 3) {
             boss.hp = boss.hp - hero2.rogueAction3()
+            println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 4) {
             boss.hp = boss.hp - hero2.rogueAction4()
+            println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 5) {
             hero2.inventory()
         } else {
@@ -160,9 +156,9 @@ fun main() {
         """.trimIndent()
         )
         var priestInput: Int? = readln().toIntOrNull()  //Aktion des Spilers
-        priestInput = readln().toIntOrNull()
         if (priestInput == 1) { //Aktion des Spilers
             boss.hp = boss.hp - hero3.spAction1()
+            println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (priestInput == 2) {
             hero3.spAction2()
         } else if (priestInput == 3) {
@@ -172,7 +168,10 @@ fun main() {
         } else {
             priestInput = null
         }
-        boss.bossActionList.random()
+        val target = chooseTarget()
+        val bossAttacke = bossAttackRandom()
+        bossAttacke(target)
+
     }
     round++
     println("$round. Runde")

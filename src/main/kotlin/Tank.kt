@@ -26,7 +26,7 @@ class Tank(
 
     override fun tankAction1() { // Thread increase Ability
         val attackName = "Taunt"
-        thread == 100 // setzt Thread des Heros auf 100
+        thread = 100 // setzt Thread des Heros auf 100
         manaOrRecource + 15 // erhöht die Wut des Characters um 15 nach einsetzten der Ability
         println("$name setzt $attackName ein und erhöht seinen Thread auf 100!")
         println("$name´s Wut steigt um 15 und beträgt nun ${manaOrRecource}")
