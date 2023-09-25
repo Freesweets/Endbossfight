@@ -65,10 +65,11 @@ fun main() {
     var gameOver = false
 
 
-    fun bossAttackRandom(): (Hero)-> Any { //greift auf eine zufällige Aktion des Bosses zu und führt diese aus
+    fun bossAttackRandom(): (Hero) -> Any { //greift auf eine zufällige Aktion des Bosses zu und führt diese aus
         var action = boss.bossActionList.random()
         return action
     }
+
     fun chooseTarget(): Hero { //bestimmt das Ziel des Angriffes. Das Ziel ist immer der Hero mit dem höchstes Thread Wert
         var target = group.maxBy { it.thread }
         return target
@@ -171,8 +172,8 @@ fun main() {
         val target = chooseTarget()
         val bossAttacke = bossAttackRandom()
         bossAttacke(target)
-
+        round++
+        println("$round. Runde")
     }
-    round++
-    println("$round. Runde")
+
 }
