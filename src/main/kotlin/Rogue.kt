@@ -64,6 +64,7 @@ class Rogue(
             var dmg = shadowStrike.random().toDouble() * int + 250
             println("$name setzt $attackName ein und fügt Ragnaros $dmg zu!")
             newManaValue - 0 // Verbraucht keine Energy wenn Rogue nicht mehr physical angreifft
+            thread += 15
             return dmg
         } else   { // (physicalOrMagic == 'P')
             val attackName = "Shadow Strike"
@@ -71,6 +72,7 @@ class Rogue(
             var dmg = shadowStrike.random().toDouble() * int
             println("$name setzt $attackName ein und fügt Ragnaros $dmg zu!")
             newManaValue - 10 //recource cost
+            thread += 15
             return dmg
         }
         //return rogueAction3()

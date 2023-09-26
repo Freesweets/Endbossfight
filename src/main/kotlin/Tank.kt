@@ -23,14 +23,14 @@ class Tank(
     fun isAlive(): Boolean {
         return hp > 0
     }
-
+    var newRage = manaOrRecource
     override fun tankAction1() { // Thread increase Ability
         val attackName = "Taunt"
-        thread = 100 // setzt Thread des Heros auf 100
-        newThread = thread + 100
-        manaOrRecource + 15 // erhöht die Wut des Characters um 15 nach einsetzten der Ability
+       // thread = 100 // setzt Thread des Heros auf 100
+       // newThread = thread + 100
+        newRage += 15 // erhöht die Wut des Characters um 15 nach einsetzten der Ability
         println("$name setzt $attackName ein und erhöht seinen Thread auf 100!")
-        println("$name´s Wut steigt um 15 und beträgt nun ${manaOrRecource}")
+        println("$name´s Wut steigt um 15 und beträgt nun ${newRage}")
     }
 
     override fun tankActiion2() { //Heal def cd Ability

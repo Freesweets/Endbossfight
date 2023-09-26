@@ -102,6 +102,7 @@ fun main() {
         warriorInput = readln().toIntOrNull()
         if (warriorInput == 1) { //Aktion des Spilers
             hero1.tankAction1()
+            hero1.thread += 100
         } else if (warriorInput == 2) {
             hero1.tankActiion2()
         } else if (warriorInput == 3) {
@@ -110,10 +111,12 @@ fun main() {
         } else if (warriorInput == 4) {
             boss.hp = boss.hp - hero1.tankAction4()
             println("${boss.name} hat noch ${boss.hp} übrig.")
-        } else if (warriorInput == 5) {
+        } /*else if (warriorInput == 5) {
             hero1.inventory()
-        } else {
+            */
+        else {
             warriorInput = null
+
         }
         println("Wähle eine Rogue Aktion aus...")
         println(
@@ -123,27 +126,31 @@ fun main() {
             2 -> Ambush (verursacht hohen Schaden. Der angerichtete Schaden wird erhöht falls in der Runde zuvor Sinister Strike eingesetzt wurde: WOMBO COMBO! - Kostet 25 Energy)
             3 -> Shadow Strike (hoher Schaden. Setzt verursachten Schaden von physisch zu magisch und vice versa. Sollte der Schaden bereits auf magisch eingestellt sein- verursacht Shadow Strike Bonusschaden und kostet keine Energy)
             4 -> Tricks of the trade (geringer Schaden. Reduziert den Thread des Rogues und erhöht den Thread des Tanks)
-            5 -> Inventar
         """.trimIndent()
         )
         var rogueInput: Int? = readln().toIntOrNull() // Aktion des Spielers
         if (rogueInput == 1) { //Aktion des Spilers
             boss.hp = boss.hp - hero2.rogueAction1()
+            hero2.thread += 15
             println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 2) {
             boss.hp = boss.hp - hero2.rogueAction2()
+            hero2.thread += 35
             println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 3) {
             boss.hp = boss.hp - hero2.rogueAction3()
+            hero2.thread += 15
             println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 4) {
             boss.hp = boss.hp - hero2.rogueAction4()
+            hero1.thread += 50
+            hero2.thread -= 50
             println("${boss.name} hat noch ${boss.hp} übrig.")
-        } else if (rogueInput == 5) {
+        } /*else if (rogueInput == 5) {
             hero2.inventory()
         } else {
             rogueInput = null
-        }
+            */
         println("Wähle eine Priest Aktion aus...")
         println(
             """
@@ -158,9 +165,11 @@ fun main() {
         var priestInput: Int? = readln().toIntOrNull()  //Aktion des Spilers
         if (priestInput == 1) { //Aktion des Spilers
             boss.hp = boss.hp - hero3.spAction1()
+            hero3.thread += 20
             println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (priestInput == 2) {
             hero3.spAction2()
+            hero3.thread -= 100
         } else if (priestInput == 3) {
             hero3.spAction3()
         } else if (priestInput == 4) {
@@ -183,5 +192,5 @@ fun main() {
         round++
         println("$round. Runde")
     }
-
 }
+
