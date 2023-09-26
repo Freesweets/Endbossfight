@@ -1,53 +1,50 @@
-import kotlin.concurrent.thread
-
-var dot: Boolean =
-    false //Wird zu begin der Runde gecheckt. Falls true dann erleidet der Character entsprechend Schaden. Default false, wird durch Boss attac getriggert
-
 fun main() {
 
     var hero1: Tank = Tank(
-        7800,
+        5800,
         0,
         68.0,
         15.0,
         25.0,
-        450.8,
-        280.0,
+        400,
+        230,
         "Schanzentor",
-        30,
-
-        )
+        0,
+        false
+    )
 
     var hero2: Rogue = Rogue(
-        4200,
+        3200,
         150,
         40.0,
         35.0,
         95.0,
-        235.5,
-        150.5,
+        225,
+        150,
         "Verox",
-        10,
+        0,
+        false,
         'P'
     )
 
     var hero3: Priest = Priest(
-        3800,
+        2800,
         2500,
         10.0,
         98.0,
         12.0,
-        130.8,
-        200.69,
+        130,
+        200,
         "Stardusk",
-        10
+        0,
+        false
     )
 
     var boss: Boss = Boss(
-        30000.0,
-        400,
+        25000.0,
         420,
-        400,
+        420,
+        420,
         "Ragnaros the Firelord",
         0
     )
@@ -60,9 +57,39 @@ fun main() {
         true
 
     )
-    val group: List<Hero> = listOf(hero1, hero2, hero3)
+
+    var group: MutableList<Hero> = mutableListOf(hero1, hero2, hero3)
     var round = 1
     var gameOver = false
+
+    fun spAction3() { // diese Ability schützt das gewählte Ziel vor dem nächsten Angriff des Bosses
+        println("Auf wen willst du Flash Heal einsetzten? 1 -> Tank, 2 -> Rogue, 3 -> Priest")
+        hero3.manaOrRecource -= 150
+        hero3.thread += 25
+        when (readln().toIntOrNull()) {
+            1 -> hero1.hp += 500
+            2 -> hero2.hp += 500
+            3 -> hero3.hp += 500
+            else -> {
+                println("Bitte wiederhole deine Eingabe. Das hat dich 150 Mana gekostet")
+                spAction3()
+            }
+        }
+    }
+
+    fun spAction4() { // DoT (damage over time) remove
+        println("Von wem möchtest du den DoT entfernen?")
+        hero3.manaOrRecource -= 250
+        hero3.thread += 25
+        when (readln().toIntOrNull()) {
+            1 -> hero1.dotActive = false
+            2 -> hero2.dotActive = false
+            3 -> hero3.dotActive = false
+            else ->
+                println("Bitte wiederhole deine Eingabe. Das hat dich 150 Mana gekostet")
+        }
+    }
+
 
     fun bossAttackRandom(): (Hero) -> Any { //greift auf eine zufällige Aktion des Bosses zu und führt diese aus
         var action = boss.bossActionList.random()
@@ -74,9 +101,21 @@ fun main() {
         return target
     }
 
-    if (!(boss.hp > 0 && (hero1.hp >= 0 || hero2.hp >= 0 || hero3.hp >= 0))) {
+    var target1 = chooseTarget()
+    var bossAttacke = bossAttackRandom()
+    fun extraMove() { // Jede Runde würfelt der Boss. Mit einer 10%igen Chance einen weiteren Angriff auszuführen
+        var dice = 1..10
+        var wurf = dice.random()
+        if (wurf == 1) { // 10% Chance
+            println("YOU FOOL! You thought there are rules in this GAME?! NOT FOR ME!")
+            bossAttacke(target1)
+        }
+    }
+
+    if (boss.hp <= 0 || (hero1.hp <= 0 || hero2.hp <= 0 || hero3.hp <= 0)) {
         gameOver = true
-    } //Bedingungen für das abschliessen des Spiels
+    }
+    //Bedingungen für das abschliessen des Spiels
     println( //println zu Begninn des Spiels
         """
         Die 3 Helden haben sich bis zu Ragnaros dem Feuerlord vorgekämpft. 
@@ -85,8 +124,11 @@ fun main() {
         Ragnaros erschlägt Majordomus mit Sulfuras und wendet sich den Helden zu....
     """.trimIndent()
     )
+    Thread.sleep(3000)
 
     while (gameOver == false) { //readln Optionen für den Spieler
+        println("${hero1.name}: ${hero1.hp} HP / ${hero1.manaOrRecource} Wut / ${hero1.thread} Bedrohung")
+        Thread.sleep(1000)
         println("Wähle eine Tank Aktion aus...")
         var warriorInput: Int? = null
         println(
@@ -96,7 +138,6 @@ fun main() {
             2 -> Last man standing (Verbraucht 50 Wut oder ist kostenlos falls deine HP unter 2500 liegt. Heilt dich auf 7800 HP)
             3 -> Heroic Strike (verursacht moderaten Schaden und erzeugt 15 Wut)
             4 -> Thunderclap (verursacht moderaten Schaden an allen Gegnern und erzeugt 20 Wut)
-            5 -> Inventar
         """.trimIndent()
         )
         warriorInput = readln().toIntOrNull()
@@ -118,6 +159,9 @@ fun main() {
             warriorInput = null
 
         }
+        //Bedingungen für das abschliessen des Spiels
+        println("${hero2.name}: ${hero2.hp} HP / ${hero2.manaOrRecource} Energie / ${hero2.thread} Bedrohung")
+        Thread.sleep(1000)
         println("Wähle eine Rogue Aktion aus...")
         println(
             """
@@ -143,23 +187,28 @@ fun main() {
             println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 4) {
             boss.hp = boss.hp - hero2.rogueAction4()
-            hero1.thread += 50
-            hero2.thread -= 50
+            hero1.thread += 20
+            if (hero2.thread >= 20)
+                hero2.thread -= 20
             println("${boss.name} hat noch ${boss.hp} übrig.")
-        } /*else if (rogueInput == 5) {
+            println("Tank thread: ${hero1.thread} Rogue thread: ${hero2.thread} ")
+            /*else if (rogueInput == 5) {
             hero2.inventory()
+        }*/
+
         } else {
             rogueInput = null
-            */
+        }
+        println("${hero3.name}: ${hero3.hp} HP / ${hero3.manaOrRecource} Mana / ${hero3.thread} Bedrohung")
+        Thread.sleep(1000)
         println("Wähle eine Priest Aktion aus...")
         println(
             """
             Priest Aktionen:        
             1 -> Mind Blast (hoher Schaden. Kostet 250 Mana)
             2 -> Fade (reduziert den Thread des Priesters auf 0)
-            3 -> Power Word: Shield (wählt ein Gruppenmitglied aus. Das gewählte Ziel erhält im nächsten Zug keinen Schaden)
-            4 -> Mass Dispel (entfernt einen damage over time effekt)
-            5 -> Inventar
+            3 -> Flash Heal (wählt ein Gruppenmitglied aus. Das gewählte Ziel erhält 500 HP.)
+            4 -> Dispel (entfernt einen damage over time Effekt von dem gewählten Ziel)
         """.trimIndent()
         )
         var priestInput: Int? = readln().toIntOrNull()  //Aktion des Spilers
@@ -171,26 +220,39 @@ fun main() {
             hero3.spAction2()
             hero3.thread -= 100
         } else if (priestInput == 3) {
-            hero3.spAction3()
+            spAction3()
         } else if (priestInput == 4) {
-            hero3.spAction4()
+            spAction4()
         } else {
             priestInput = null
         }
-        val target = chooseTarget()
-        val bossAttacke = bossAttackRandom()
-        bossAttacke(target)
-        /*fun extraMove() {
-            var dice = 1..10
-            var wurf = dice.random()
-            if (wurf == 1){
-                bossAttacke(target)
-            }
+        println("Ragnaros ist am Zug!")
+        Thread.sleep(2000)
+        if (hero1.dotActive == true) {
+            hero1.hp -= 150
+            println("${hero1.name} hat 150 Schaden durch den DoT-Effekt erhalten")
         }
-
-         */
+        if (hero2.dotActive == true) {
+            hero2.hp -= 150
+            println("${hero2.name} hat 150 Schaden durch den DoT-Effekt erhalten")
+        }
+        if (hero3.dotActive == true) {
+            hero3.hp -= 150
+            println("${hero3.name} hat 150 Schaden durch den DoT-Effekt erhalten")
+        }
+        bossAttacke(target1)
+        extraMove()
+        if (boss.hp <= 0){
+            gameOver = true
+            println("GEWONNEN")
+        }
+        if (hero1.hp <= 0 || hero2.hp <= 0 || hero3.hp <= 0){
+            gameOver = true
+            println("GAME OVER")
+        }
+        //Bedingungen für das abschliessen des Spiels
+        Thread.sleep(1000)
         round++
         println("$round. Runde")
     }
 }
-

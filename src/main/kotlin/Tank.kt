@@ -4,10 +4,11 @@ class Tank(
     strg: Double,
     int: Double,
     agi: Double,
-    pDef: Double,
-    mDef: Double,
+    pDef: Int,
+    mDef: Int,
     name: String,
-    thread: Int
+    thread: Int,
+    dotActive: Boolean
 ) : Hero(
     hp,
     manaOrRecource,
@@ -17,20 +18,16 @@ class Tank(
     pDef,
     mDef,
     name,
-    thread
+    thread,
+    dotActive
 ) {
-    var newThread = thread
-    fun isAlive(): Boolean {
-        return hp > 0
-    }
-    var newRage = manaOrRecource
     override fun tankAction1() { // Thread increase Ability
         val attackName = "Taunt"
        // thread = 100 // setzt Thread des Heros auf 100
        // newThread = thread + 100
-        newRage += 15 // erhöht die Wut des Characters um 15 nach einsetzten der Ability
+        manaOrRecource += 15 // erhöht die Wut des Characters um 15 nach einsetzten der Ability
         println("$name setzt $attackName ein und erhöht seinen Thread auf 100!")
-        println("$name´s Wut steigt um 15 und beträgt nun ${newRage}")
+        println("$name´s Wut steigt um 15 und beträgt nun ${manaOrRecource}")
     }
 
     override fun tankActiion2() { //Heal def cd Ability
@@ -48,7 +45,7 @@ class Tank(
         val attackName = "Heroic Strike"
         var heroicStrike = 15..18
         var dmg = heroicStrike.random().toDouble() * strg
-        manaOrRecource + 15
+        manaOrRecource += 15
         println("$name setzt $attackName ein und fügt Ragnaros $dmg zu")
         return dmg
     }
@@ -57,7 +54,7 @@ class Tank(
         val attackName = "Thunderclap"
         var thunderclap = 1..2
         var dmg = thunderclap.random().toDouble() * agi * int
-        manaOrRecource + 20 // erhöht den Thread des Heros um 20
+        manaOrRecource += 20 // erhöht den Thread des Heros um 20
         println("$name setzt $attackName ein verursacht damit $dmg an allen Gegnern")
         return dmg
     }

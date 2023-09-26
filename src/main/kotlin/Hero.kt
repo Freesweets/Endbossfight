@@ -4,10 +4,11 @@ open class Hero(
     var strg: Double, // Gibt den Stärkewert eines Characters an
     var int: Double, // Gibt den Intilligenzwert eines Characters an
     var agi: Double, // Gibt den Beweglichkeitswert eines Charakers an
-    open var pDef: Double, // Gibt die physische Defensive eines Characters an
-    open var mDef: Double, // Gibt die magische Defensive eines Characters an
+    open var pDef: Int, // Gibt die physische Defensive eines Characters an
+    open var mDef: Int, // Gibt die magische Defensive eines Characters an
     open val name: String, // Name des Characters
     var thread: Int, // gibt an wie hoch die "Aggro" des Characters ist und wie hoch die chance ist von Ragnaros angegriffen zu werden
+    var dotActive: Boolean // gibt an ob der Character unter einem damage over timer Effekt leidet oder nicht
 ) {
     /*var inventoryVariable: Map<Int, String> = mapOf(
         1 to "Heal Potion",
