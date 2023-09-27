@@ -116,7 +116,7 @@ class Boss(
             }
         }
     }
-    open var bossActionList = listOf<(Hero) -> Any>(
+    open var bossActionList = listOf<(Hero) -> Any>( // war vorher mit :: referiert. Danke Max für die Hilfe und den Code!
         { hero: Hero -> enemyAction1(hero) },
         { hero: Hero -> enemyAction2(hero) },
         { hero: Hero -> enemyAction3(hero) },
