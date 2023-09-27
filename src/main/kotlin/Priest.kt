@@ -22,10 +22,6 @@ class Priest(
     dotActive
 ) {
 
-    var newThread = thread
-    fun isAlive(): Boolean {
-        return hp > 0
-    }
     override fun spAction1():Double {
         val attackName = "Mind Blast"
         var attacke4 = 18..22
@@ -38,9 +34,14 @@ class Priest(
 
     override fun spAction2() { // reduziert den Thread des Heros auf 0
         val attackName = "Fade"
-        thread = 0
-        println("$name setzt $attackName ein um seine Bedrohung auf 0 zu setzten")
-        manaOrRecource -= 150
+        if (thread > 0) {
+            thread = 0
+            println("$name setzt $attackName ein um seine Bedrohung auf 0 zu setzten")
+            manaOrRecource -= 150
+        }
+        else {
+            println("Deine Bedrohung beträgt bereits 0! Du hast deinen move verschwendet")
+        }
     }
 
    /* override fun spAction3() { // diese Ability schützt das gewählte Ziel vor dem nächsten Angriff des Bosses

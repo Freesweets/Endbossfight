@@ -31,16 +31,20 @@ class Boss(
         newRecource += 10
         println("Ragnaros setzt $attackName ein und fügt damit ${hero.name} $dmg Schaden zu")
         hero.hp -= dmg
+        if (dmg < 0){
+            dmg = 0
+            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+        }
     }
 
     override fun enemyAction3(hero: Hero) { // Wenn empoweredSulfuras false ist dann wird es auf true gesetzt
         val attackName = "Empower Sulfuras"
         if (empoweredSulfuras == false) {
-            empoweredSulfuras == true
+            empoweredSulfuras = true
             println("Ragnaros setzt $attackName ein und verstärkt Sulfuras mit Lava! Nächste Runde wirds weh tun!")
             newRecource += 15
         }
-        if (empoweredSulfuras == true) { // Sollte empoweredSulfuras bereits true sein, so wird ein mächtiger Angriff ausgeführt
+        else if (empoweredSulfuras == true) { // Sollte empoweredSulfuras bereits true sein, so wird ein mächtiger Angriff ausgeführt
             var lavaSulfuras = 4..10
             var dmg = (lavaSulfuras.random() * strg) / 2 - hero.mDef
             println("Ich hab euch gewarnt!")
@@ -48,6 +52,10 @@ class Boss(
             newRecource += 15
             empoweredSulfuras = false // Setzt nach dem erfolgreichen Angriff empoweredSulfuras wieder auf false
             hero.hp -= dmg
+            if (dmg < 0){
+                dmg = 0
+                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+            }
         } //else {
             //println("EIN FEHLER IM CODE! Ich greif einfach noch mal an! HAHA")
         //}
@@ -56,11 +64,15 @@ class Boss(
     override fun enemyAction4(hero: Hero) { // dot effect. Jede Runde erleidet der Hero Schaden
         val attackName = "Living Meteor"
         var livingMeteor = 20..80
-        var dmg = (livingMeteor.random() * 6) - hero.mDef
+        var dmg = (livingMeteor.random() * 8) - hero.mDef
         println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu")
         newRecource += 15
         hero.dotActive = true
         hero.hp -= dmg
+        if (dmg < 0){
+            dmg = 0
+            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+        }
     }
 
     override fun enemyAction5(hero: Hero) { // Taucht ab um sich zu schützen
@@ -84,17 +96,24 @@ class Boss(
             println("FEEL MY WRATH!")
             var wrathOfRagnaros = 3..10
             var dmg = (wrathOfRagnaros.random() * strg * int) / 10 - hero.pDef - hero.mDef
-            println("Ragnaros fügt ALLEN Helden $dmg Schaden mit $attackName zu!")
-            var newHp = hero.hp - dmg
-            hero.hp = newHp
+            println("Ragnaros fügt ${hero.name} Schaden mit $attackName zu!")
+            hero.hp - dmg
+            if (dmg < 0){
+                dmg = 0
+                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+            }
         } else {
-            println("EIN FEHLER IM CODE! Ich greif einfach noch mal an! HAHA")
+            println("NICHT GENÜGEND RECOURCE FÜR DIESEN ANGRIFF?! DAS MUSS EIN FEHLER IM CODE SEIN! ICH MACHE KEINE FEHLER!!")
             val attackName = "Lava Burst"
             var lavaBurst = 1..5
             var dmg = (lavaBurst.random() * int) - hero.pDef + 100
             newRecource += 15 //nach einsatz der Ability wird die Recource um 15 erhöht
-            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name} $dmg Schaden zu")
+            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name} $dmg Schaden zu. Obwohl er einen Fehler gemacht hat?!")
             hero.hp -= dmg
+            if (dmg < 0){
+                dmg = 0
+                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+            }
         }
     }
     open var bossActionList = listOf<(Hero) -> Any>(
