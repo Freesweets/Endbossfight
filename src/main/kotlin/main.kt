@@ -189,7 +189,7 @@ fun main() {
             boss.hp = boss.hp - hero2.rogueAction4()
             hero1.thread += 20
             println("${boss.name} hat noch ${boss.hp} übrig.")
-            println("Tank thread: ${hero1.thread} Rogue thread: ${hero2.thread} ")
+            println("neuer Bedrohungswert des Tanks: ${hero1.thread}. Neuer Bedrohungswert des Schurken: ${hero2.thread} ")
             /*else if (rogueInput == 5) {
             hero2.inventory()
         }*/
@@ -235,8 +235,7 @@ fun main() {
         ------------------------------------------------------------------------------------------------------------------------------------------------------
 
         """.trimIndent())
-        Thread.sleep(2000)
-        if (hero1.dotActive == true) { //
+        if (hero1.dotActive == true) { // DoT Effekt logik
             hero1.hp -= 150
             println("${hero1.name} hat 150 Schaden durch den DoT-Effekt erhalten")
         }
@@ -248,8 +247,6 @@ fun main() {
             hero3.hp -= 150
             println("${hero3.name} hat 150 Schaden durch den DoT-Effekt erhalten")
         }
-        bossAttacke(chooseTarget())
-        extraMove()
         if (boss.hp <= 0) { // Bedingungen für einen Sieg
             gameOver = true
             println("GEWONNEN")
@@ -258,6 +255,10 @@ fun main() {
             gameOver = true
             println("GAME OVER")
         }
+        println("Ragnaros: LASS MICH NACHDENKEN!!")
+        Thread.sleep(3000)
+        bossAttacke(chooseTarget()) // Regulärer Boss move
+        extraMove() // 10% chance auf einen weiteren move
         round++ // Rundenzähler
         println("$round. Runde")
     }
