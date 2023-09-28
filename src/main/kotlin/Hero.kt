@@ -7,7 +7,7 @@ open class Hero(
     open var pDef: Int, // Gibt die physische Defensive eines Characters an
     open var mDef: Int, // Gibt die magische Defensive eines Characters an
     open val name: String, // Name des Characters
-    var thread: Int, // gibt an wie hoch die "Aggro" des Characters ist und wie hoch die chance ist von Ragnaros angegriffen zu werden
+    var threat: Int, // gibt an wie hoch die "Aggro" des Characters ist und wie hoch die chance ist von Ragnaros angegriffen zu werden
     var dotActive: Boolean // gibt an ob der Character unter einem damage over timer Effekt leidet oder nicht
 ) {
     /*var inventoryVariable: Map<Int, String> = mapOf(

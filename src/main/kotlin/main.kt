@@ -56,7 +56,7 @@ fun main() {
     fun spAction3() { // diese Ability schützt das gewählte Ziel vor dem nächsten Angriff des Bosses
         println("Auf wen willst du Flash Heal einsetzten? 1 -> Tank, 2 -> Rogue, 3 -> Priest")
         hero3.manaOrRecource -= 100
-        hero3.thread += 25
+        hero3.threat += 25
         when (readln().toIntOrNull()) {
             1 -> hero1.hp += 500
             2 -> hero2.hp += 500
@@ -71,7 +71,7 @@ fun main() {
     fun spAction4() { // DoT (damage over time) remove
         println("Von wem möchtest du den DoT entfernen?")
         hero3.manaOrRecource -= 250
-        hero3.thread += 25
+        hero3.threat += 25
         when (readln().toIntOrNull()) {
             1 -> hero1.dotActive = false
             2 -> hero2.dotActive = false
@@ -87,11 +87,11 @@ fun main() {
         return action
     }
 
-    fun chooseTarget(): Hero { //bestimmt das Ziel des Angriffes. Das Ziel ist immer der Hero mit dem höchstes Thread Wert
-        var target = group.maxBy { it.thread } // Danke Max!
-        /* if (hero1.thread > hero2.thread && hero1.thread > hero3.thread) {
+    fun chooseTarget(): Hero { //bestimmt das Ziel des Angriffes. Das Ziel ist immer der Hero mit dem höchstes threat Wert
+        var target = group.maxBy { it.threat } // Danke Max!
+        /* if (hero1.threat > hero2.threat && hero1.threat > hero3.threat) {
              return hero1
-         } else if (hero2.thread > hero1.thread && hero2.thread > hero3.thread) {
+         } else if (hero2.threat > hero1.threat && hero2.threat > hero3.threat) {
              return hero2
          } else {
              return hero3
@@ -130,13 +130,13 @@ fun main() {
     Thread.sleep(3000)
 
     while (gameOver == false) { //readln Optionen für den Spieler
-        println("${hero1.name}: ${hero1.hp} HP / ${hero1.manaOrRecource} Wut / ${hero1.thread} Bedrohung")
+        println("${hero1.name}: ${hero1.hp} HP / ${hero1.manaOrRecource} Wut / ${hero1.threat} Bedrohung")
         println("Wähle eine Tank Aktion aus...")
         var warriorInput: Int? = null
         println(
             """
             Tank Aktionen:
-            1 -> Taunt (erhöht deinen Thread und erzeugt 15 Wut)
+            1 -> Taunt (erhöht deinen threat und erzeugt 15 Wut)
             2 -> Last man standing (Verbraucht 50 Wut oder ist kostenlos falls deine HP unter 2500 liegt. Heilt dich auf 7800 HP)
             3 -> Heroic Strike (verursacht moderaten Schaden und erzeugt 15 Wut)
             4 -> Thunderclap (verursacht moderaten Schaden an allen Gegnern und erzeugt 20 Wut)
@@ -163,15 +163,15 @@ fun main() {
 
         }
         //Bedingungen für das abschliessen des Spiels
-        println("${hero2.name}: ${hero2.hp} HP / ${hero2.manaOrRecource} Energie / ${hero2.thread} Bedrohung")
+        println("${hero2.name}: ${hero2.hp} HP / ${hero2.manaOrRecource} Energie / ${hero2.threat} Bedrohung")
         println("Wähle eine Rogue Aktion aus...")
         println(
             """
             Rogue Aktionen:
-            1 -> Sinister Stiker (verursacht moderaten Schaden. Koster 15 Energy)
+            1 -> Sinister Stike (verursacht moderaten Schaden. Koster 15 Energy)
             2 -> Ambush (verursacht hohen Schaden. Der angerichtete Schaden wird erhöht falls in der Runde zuvor Sinister Strike eingesetzt wurde: WOMBO COMBO! - Kostet 25 Energy)
             3 -> Shadow Strike (hoher Schaden. Setzt verursachten Schaden von physisch zu magisch und vice versa. Sollte der Schaden bereits auf magisch eingestellt sein- verursacht Shadow Strike Bonusschaden und kostet keine Energy)
-            4 -> Tricks of the trade (geringer Schaden. Reduziert den Thread des Rogues und erhöht den Thread des Tanks)
+            4 -> Tricks of the trade (geringer Schaden. Reduziert den threat des Rogues und erhöht den threat des Tanks)
             -------------------------------------------------------------------------------------------------------------------------------------------------------
         """.trimIndent()
         )
@@ -187,9 +187,9 @@ fun main() {
             println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (rogueInput == 4) {
             boss.hp = boss.hp - hero2.rogueAction4()
-            hero1.thread += 20
+            hero1.threat += 20
             println("${boss.name} hat noch ${boss.hp} übrig.")
-            println("neuer Bedrohungswert des Tanks: ${hero1.thread}. Neuer Bedrohungswert des Schurken: ${hero2.thread} ")
+            println("neuer Bedrohungswert des Tanks: ${hero1.threat}. Neuer Bedrohungswert des Schurken: ${hero2.threat} ")
             /*else if (rogueInput == 5) {
             hero2.inventory()
         }*/
@@ -197,14 +197,14 @@ fun main() {
         } else {
             rogueInput = null
         }
-        println("${hero3.name}: ${hero3.hp} HP / ${hero3.manaOrRecource} Mana / ${hero3.thread} Bedrohung")
+        println("${hero3.name}: ${hero3.hp} HP / ${hero3.manaOrRecource} Mana / ${hero3.threat} Bedrohung")
         Thread.sleep(1000)
         println("Wähle eine Priest Aktion aus...")
         println(
             """
             Priest Aktionen:        
             1 -> Mind Blast (hoher Schaden. Kostet 250 Mana)
-            2 -> Fade (reduziert den Thread des Priesters auf 0)
+            2 -> Fade (reduziert den threat des Priesters auf 0)
             3 -> Flash Heal (wählt ein Gruppenmitglied aus. Das gewählte Ziel erhält 500 HP.)
             4 -> Dispel (entfernt einen damage over time Effekt von dem gewählten Ziel)
             -------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -257,8 +257,10 @@ fun main() {
         }
         println("Ragnaros: LASS MICH NACHDENKEN!!")
         Thread.sleep(3000)
+        println("------------------------------------------------------------------------------------------------------------------------------------------------------")
         bossAttacke(chooseTarget()) // Regulärer Boss move
         extraMove() // 10% chance auf einen weiteren move
+        println("------------------------------------------------------------------------------------------------------------------------------------------------------")
         round++ // Rundenzähler
         println("$round. Runde")
     }

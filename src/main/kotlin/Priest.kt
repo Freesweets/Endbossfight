@@ -7,7 +7,7 @@ class Priest(
     pDef: Int,
     mDef: Int,
     name: String,
-    thread: Int,
+    threat: Int,
     dotActive: Boolean
 ) : Hero(
     hp,
@@ -18,7 +18,7 @@ class Priest(
     pDef,
     mDef,
     name,
-    thread,
+    threat,
     dotActive
 ) {
 
@@ -28,14 +28,14 @@ class Priest(
         var dmg = attacke4.random().toDouble() * int
         println("$name setzt $attackName ein und fügt Ragnaros $dmg zu!")
         manaOrRecource -= 250
-        thread += 35
+        threat += 35
         return dmg
     }
 
-    override fun spAction2() { // reduziert den Thread des Heros auf 0
+    override fun spAction2() { // reduziert den threat des Heros auf 0
         val attackName = "Fade"
-        if (thread > 0) {
-            thread = 0
+        if (threat > 0) {
+            threat = 0
             println("$name setzt $attackName ein um seine Bedrohung auf 0 zu setzten")
             manaOrRecource -= 150
         }

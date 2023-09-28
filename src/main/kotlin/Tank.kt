@@ -7,7 +7,7 @@ class Tank(
     pDef: Int,
     mDef: Int,
     name: String,
-    thread: Int,
+    threat: Int,
     dotActive: Boolean
 ) : Hero(
     hp,
@@ -18,14 +18,14 @@ class Tank(
     pDef,
     mDef,
     name,
-    thread,
+    threat,
     dotActive
 ) {
-    override fun tankAction1() { // Thread increase Ability
+    override fun tankAction1() { // threat increase Ability
         val attackName = "Taunt"
-        thread += 100 // setzt Thread des Heros auf 100
+        threat += 100 // setzt threat des Heros auf 100
         manaOrRecource += 15 // erhöht die Wut des Characters um 15 nach einsetzten der Ability
-        println("$name setzt $attackName ein und erhöht seinen Thread auf 100!")
+        println("$name setzt $attackName ein und erhöht seinen threat auf 100!")
         println("$name´s Wut steigt um 15 und beträgt nun ${manaOrRecource}")
     }
 
@@ -35,7 +35,7 @@ class Tank(
             hp = 7800 // setzt die HP des Heros auf den festgelegten Wert
             println("$name setzt $attackName ein um sich wieder auf 100% zu heilen")
             manaOrRecource - 50 // verbraucht Wut als recource
-            thread += 15
+            threat += 15
         } else {
             println("Du hast nicht genügend Schaden erlitten oder nicht genung Wut um diese Ability einzusetzten!")
         }
@@ -46,7 +46,7 @@ class Tank(
         var heroicStrike = 15..18
         var dmg = heroicStrike.random().toDouble() * strg
         manaOrRecource += 15
-        thread += 20
+        threat += 20
         println("$name setzt $attackName ein und fügt Ragnaros $dmg zu")
         return dmg
     }
@@ -55,8 +55,8 @@ class Tank(
         val attackName = "Thunderclap"
         var thunderclap = 1..2
         var dmg = thunderclap.random().toDouble() * agi * int
-        manaOrRecource += 20 // erhöht den Thread des Heros um 20
-        thread += 35
+        manaOrRecource += 20 // erhöht den threat des Heros um 20
+        threat += 35
         println("$name setzt $attackName ein verursacht damit $dmg. Seine Bedrohung wurde um 35 erhöht")
         return dmg
     }

@@ -7,7 +7,7 @@ class Rogue(
     pDef: Int,
     mDef: Int,
     name: String,
-    thread: Int,
+    threat: Int,
     dotActive: Boolean,
     val physicalOrMagic: Char // Gibt an ob der Character physische oder magische Angriffe ausführt
 ) : Hero(
@@ -19,7 +19,7 @@ class Rogue(
     pDef,
     mDef,
     name,
-    thread,
+    threat,
     dotActive
 ) {
     var ssUsed: Boolean =
@@ -31,7 +31,7 @@ class Rogue(
         var dmg = sinisterStrige.random().toDouble() * agi
         println("$name fügt Ragnaros mit ${attackName}, $dmg Schaden zu!")
         ssUsed = true
-        thread += 10
+        threat += 10
         manaOrRecource -= 15 //recource cost
         return dmg
     }
@@ -46,7 +46,7 @@ class Rogue(
             ssUsed =
                 false // der Combopoint wird quasi "verbraucht" und die var ssUsed wird auf false gesetzt. Dadurch wird ein erneutes einsetzten der Ability weniger dmg verursachen, es sei denn man setzt erneut vorher Sinister Strike ein
             manaOrRecource - 25 //recource cost
-            thread += 10
+            threat += 10
             return dmg
         } else {
             var ambush = 10..20
@@ -55,7 +55,7 @@ class Rogue(
                     .toDouble() * strg // Schadenberechnung mit dem Strenght Wert als Multiplikator. Strenghvalue ist deutlich geringer als Agilityvalue. Dieser "else-Zweig" tritt nur ein wenn var ssUsed false ist
             println("$name setzt Ambush ein und fügt Ragnaros $dmg zu!")
             manaOrRecource -= 25 //recource cost
-            thread += 30
+            threat += 30
             return dmg
         }
     }
@@ -67,7 +67,7 @@ class Rogue(
             var dmg = shadowStrike.random().toDouble() * int + 250
             println("$name setzt $attackName ein und fügt Ragnaros $dmg zu!")
             manaOrRecource -= 0 // Verbraucht keine Energy wenn Rogue nicht mehr physical angreifft
-            thread += 20
+            threat += 20
             return dmg
         } else { // (physicalOrMagic == 'P')
             val attackName = "Shadow Strike"
@@ -75,13 +75,13 @@ class Rogue(
             var dmg = shadowStrike.random().toDouble() * int
             println("$name setzt $attackName ein und fügt Ragnaros $dmg zu!")
             manaOrRecource -= 10 //recource cost
-            thread += 20
+            threat += 20
             return dmg
         }
         //return rogueAction3()
     }
 
-    override fun rogueAction4(): Double { //Rogue Ability die wenig Schaden verursacht, aber den Thread des Schurken um 5 reduziert und seinen Type von physical zu magic oder andersrum ändert
+    override fun rogueAction4(): Double { //Rogue Ability die wenig Schaden verursacht, aber den threat des Schurken um 5 reduziert und seinen Type von physical zu magic oder andersrum ändert
         if (physicalOrMagic == 'P') { // 'P' = Physical
             val attackName = "Tricks of the trade"
             var tricksOfTheTrade = 1..3
@@ -89,8 +89,8 @@ class Rogue(
             println("$name setzt $attackName ein und fügt Ragnaros $dmg zu!")
             manaOrRecource -= 15 //recource cost
             physicalOrMagic == 'M'
-            if (thread >= 20) {
-                thread -= 20
+            if (threat >= 20) {
+                threat -= 20
             }
             return dmg
         } else { //(physicalOrMagic == 'M')'M' = Magic
@@ -100,8 +100,8 @@ class Rogue(
             println("$name setzt $attackName ein und fügt Ragnaros $dmg zu!")
             manaOrRecource -= 15 //recource cost
             physicalOrMagic == 'P'
-            if (thread >= 20) {
-                thread -= 20
+            if (threat >= 20) {
+                threat -= 20
             }
             return dmg
         }//else return rogueAction4()
