@@ -48,7 +48,6 @@ fun main() {
         "Ragnaros the Firelord",
         0
     )
-
     var group: MutableList<Hero> = mutableListOf(hero1, hero2, hero3)
     var round = 1
     var gameOver = false
@@ -269,7 +268,7 @@ fun main() {
         }
         if (hero1.hp <= 0 || hero2.hp <= 0 || hero3.hp <= 0) { // Bedingungen für eine Niederlage
             gameOver = true
-            println("GAME OVER")
+            println("Geist freilassen")
         }
         println("Ragnaros: LASS MICH NACHDENKEN!!")
         Thread.sleep(2000)
