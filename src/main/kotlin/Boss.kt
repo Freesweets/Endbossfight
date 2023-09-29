@@ -27,7 +27,7 @@ class Boss(
         hero.hp -= dmg
         if (dmg < 0){
             dmg = 0
-            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Actimel heute morgen getrunken")
         }
     }
 
@@ -48,7 +48,7 @@ class Boss(
             hero.hp -= dmg
             if (dmg < 0){
                 dmg = 0
-                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Actimel heute morgen getrunken!")
             }
         } //else {
             //println("EIN FEHLER IM CODE! Ich greif einfach noch mal an! HAHA")
@@ -65,7 +65,7 @@ class Boss(
         hero.hp -= dmg
         if (dmg < 0){
             dmg = 0
-            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+            println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Actimel heute morgen getrunken!")
         }
     }
 
@@ -94,7 +94,7 @@ class Boss(
             hero.hp - dmg
             if (dmg < 0){
                 dmg = 0
-                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Actimel heute morgen getrunken!")
             }
         } else {
             println("NICHT GENÜGEND RECOURCE FÜR DIESEN ANGRIFF?! DAS MUSS EIN FEHLER IM CODE SEIN! ICH MACHE KEINE FEHLER!!")
@@ -106,7 +106,7 @@ class Boss(
             hero.hp -= dmg
             if (dmg < 0){
                 dmg = 0
-                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Starke Abwehrkräfte!")
+                println("Ragnaros setzt $attackName ein und fügt damit ${hero.name}, $dmg Schaden zu! Da hat wohl jemand Actimel heute morgen getrunken!")
             }
         }
     }

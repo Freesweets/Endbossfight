@@ -31,7 +31,7 @@ class Tank(
 
     override fun tankActiion2() { //Heal def cd Ability
         val attackName = "Last man standing"
-        if (hp < 2500 || manaOrRecource == 50) { //bedingung zum einsetzten der Ability ist dass der Hero weniger als 2,5k hp hat und mehr als 50 Wut
+        if (hp < 2500 || manaOrRecource == 80) { //bedingung zum einsetzten der Ability ist dass der Hero weniger als 2,5k hp hat und mehr als 50 Wut
             hp = 7800 // setzt die HP des Heros auf den festgelegten Wert
             println("$name setzt $attackName ein um sich wieder auf 100% zu heilen")
             manaOrRecource - 50 // verbraucht Wut als recource

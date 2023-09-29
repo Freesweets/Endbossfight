@@ -58,9 +58,21 @@ fun main() {
         hero3.manaOrRecource -= 100
         hero3.threat += 25
         when (readln().toIntOrNull()) {
-            1 -> hero1.hp += 500
-            2 -> hero2.hp += 500
-            3 -> hero3.hp += 500
+            1 -> if (hero1.hp < 5800) {
+                hero1.hp += 500
+                println("${hero1.name} wurde um 500 HP geheilt")
+            }
+
+            2 -> if (hero2.hp < 3200) {
+                hero2.hp += 500
+                println("${hero2.name} wurde um 500 HP geheilt")
+            }
+
+            3 -> if (hero3.hp < 2800) {
+                hero3.hp += 500
+                println("${hero3.name} wurde um 500 HP geheilt")
+            }
+
             else -> {
                 println("Bitte wiederhole deine Eingabe. Das hat dich 150 Mana gekostet")
                 spAction3()
@@ -110,13 +122,15 @@ fun main() {
             bossAttacke(chooseTarget())
         }
     }
-    println("""
+    println(
+        """
         Alle Heros basieren auf echten Charakteren von Freunden aus dem Spiel World of Warcraft...
         "Schanzentor" ist ein Tank. Diese halten zwar viel Schaden aus, verursacht jedoch selbst relativ geringen Schaden.
         "Verox" ist ein Schurke. Seine Angriffe bauen aufeinander auf und verursachen viel Schaden.
         "Stardusk" ist ein Schatten Priester. Zwar verursacht er moderaten Schaden, kann aber auch seine Gruppenmitglieder mit seinen Fähigkeiten unterstützen.
         -------------------------------------------------------------------------------------------------------------------------------------------------------
-    """.trimIndent())
+    """.trimIndent()
+    )
     Thread.sleep(2000)
     println( //println zu Begninn des Spiels
         """
@@ -137,7 +151,7 @@ fun main() {
             """
             Tank Aktionen:
             1 -> Taunt (erhöht deinen threat und erzeugt 15 Wut)
-            2 -> Last man standing (Verbraucht 50 Wut oder ist kostenlos falls deine HP unter 2500 liegt. Heilt dich auf 7800 HP)
+            2 -> Last man standing (Verbraucht 80 Wut oder ist kostenlos falls deine HP unter 2500 liegt. Setzt deine HP auf 7800)
             3 -> Heroic Strike (verursacht moderaten Schaden und erzeugt 15 Wut)
             4 -> Thunderclap (verursacht moderaten Schaden an allen Gegnern und erzeugt 20 Wut)
             -------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -229,12 +243,14 @@ fun main() {
         if (hero3.manaOrRecource < 2500) { // Priester Mana wird jede runde erhöht wenn es nicht bereits sein maximum von 2500 erreicht hat
             hero3.manaOrRecource += 100
         }
-        println("""
+        println(
+            """
         -------------------------------------------------------------------------------------------------------------------------------------------------------
         Ragnaros ist am Zug!
         ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        """.trimIndent())
+        """.trimIndent()
+        )
         if (hero1.dotActive == true) { // DoT Effekt logik
             hero1.hp -= 150
             println("${hero1.name} hat 150 Schaden durch den DoT-Effekt erhalten")
@@ -256,7 +272,7 @@ fun main() {
             println("GAME OVER")
         }
         println("Ragnaros: LASS MICH NACHDENKEN!!")
-        Thread.sleep(3000)
+        Thread.sleep(2000)
         println("------------------------------------------------------------------------------------------------------------------------------------------------------")
         bossAttacke(chooseTarget()) // Regulärer Boss move
         extraMove() // 10% chance auf einen weiteren move
