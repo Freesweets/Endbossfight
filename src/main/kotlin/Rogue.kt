@@ -107,4 +107,48 @@ class Rogue(
         }//else return rogueAction4()
     }
 
+    override fun useInventory() {
+        var input = readln().toInt()
+        when (input) {
+            1 -> {
+                if ("Health Potion" in inventoryList) {
+                    hp += 500
+                    inventoryList.removeAt(0)
+                    println("$name hat seine Lebenspunkte permanent um 500 erhöht!")
+                } else return println("Keine Health Potions mehr übrig...")
+
+            }
+
+            2 -> {
+                if ("STRG Potion" in inventoryList) {
+                    strg += 50
+                    inventoryList.removeAt(1)
+                    println("$name hat seine Stärke permanent um 50 erhöht!")
+                } else return println("Keine STRG Potions mehr übrig...")
+
+            }
+
+            3 -> {
+                if ("AGI Potion" in inventoryList) {
+                    agi += 50
+                    inventoryList.removeAt(2)
+                    println("$name hat seine Beweglichkeit permanent um 50 erhöht!")
+                } else return println("Keine AGI Potions mehr übrig...")
+            }
+
+            4 -> {
+                if ("INT Potion" in inventoryList) {
+                    int += 50
+                    inventoryList.removeAt(3)
+                    println("$name hat seine Intelligenz permanent um 50 erhöht!")
+                } else return println("Keine INT Potions mehr übrig...")
+
+            }
+
+            else -> {
+                println("Ungültige Eingabe!")
+            }
+        }
+
+    }
 }

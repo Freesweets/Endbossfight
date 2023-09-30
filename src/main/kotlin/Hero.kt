@@ -95,6 +95,44 @@ open class Hero(
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
         return dmg
     }
+
+    //open var inventoryList: MutableList<String> = mutableListOf("Health Potion", "STRG Potion", "AGI Potion", "INT Potion")
+
+    open fun useInventory() {
+        var input = readln().toInt()
+        when (input) {
+            1 -> {
+                hp += 500
+                inventoryList.removeAt(0)
+                println("$name hat seine Lebenspunkte permanent um 50 erhöht!")
+
+            }
+
+            2 -> {
+                strg += 50
+                inventoryList.removeAt(1)
+                println("$name hat seine Stärke permanent um 50 erhöht!")
+
+            }
+
+            3 -> {
+                agi += 50
+                inventoryList.removeAt(2)
+                println("$name hat seine Beweglichkeit permanent um 50 erhöht!")
+            }
+
+            4 -> {
+                int += 50
+                inventoryList.removeAt(3)
+                println("$name hat seine Intelligenz permanent um 50 erhöht!")
+
+            }
+            else -> {
+                println("Ungültige Eingabe!")
+            }
+        }
+
+    }
     /* open fun inventory(){
      when (inventoryVariable){
      }

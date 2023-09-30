@@ -1,3 +1,4 @@
+var inventoryList: MutableList<String> = mutableListOf("Health Potion", "STRG Potion", "AGI Potion", "INT Potion")
 fun main() {
 
     var hero1: Tank = Tank(
@@ -130,7 +131,7 @@ fun main() {
         -------------------------------------------------------------------------------------------------------------------------------------------------------
     """.trimIndent()
     )
-    Thread.sleep(2000)
+    //Thread.sleep(2000)
     println( //println zu Begninn des Spiels
         """
         Die 3 Helden haben sich bis zu Ragnaros dem Feuerlord vorgekämpft. 
@@ -140,7 +141,7 @@ fun main() {
         -------------------------------------------------------------------------------------------------------------------------------------------------------
     """.trimIndent()
     )
-    Thread.sleep(3000)
+    //Thread.sleep(3000)
 
     while (gameOver == false) { //readln Optionen für den Spieler
         println("${hero1.name}: ${hero1.hp} HP / ${hero1.manaOrRecource} Wut / ${hero1.threat} Bedrohung")
@@ -153,6 +154,7 @@ fun main() {
             2 -> Last man standing (Verbraucht 80 Wut oder ist kostenlos falls deine HP unter 2500 liegt. Setzt deine HP auf 7800)
             3 -> Heroic Strike (verursacht moderaten Schaden und erzeugt 15 Wut)
             4 -> Thunderclap (verursacht moderaten Schaden an allen Gegnern und erzeugt 20 Wut)
+            5 -> Inventory 
             -------------------------------------------------------------------------------------------------------------------------------------------------------
 
         """.trimIndent()
@@ -168,13 +170,12 @@ fun main() {
         } else if (warriorInput == 4) {
             boss.hp = boss.hp - hero1.tankAction4()
             println("${boss.name} hat noch ${boss.hp} übrig.")
-        } /*else if (warriorInput == 5) {
-            hero1.inventory()
-            */
-        else {
-            warriorInput = null
-
+        } else if (warriorInput == 5) {
+            hero1.useInventory()
         }
+        //  warriorInput = null
+
+
         //Bedingungen für das abschliessen des Spiels
         println("${hero2.name}: ${hero2.hp} HP / ${hero2.manaOrRecource} Energie / ${hero2.threat} Bedrohung")
         println("Wähle eine Rogue Aktion aus...")
@@ -185,6 +186,7 @@ fun main() {
             2 -> Ambush (verursacht hohen Schaden. Der angerichtete Schaden wird erhöht falls in der Runde zuvor Sinister Strike eingesetzt wurde: WOMBO COMBO! - Kostet 25 Energy)
             3 -> Shadow Strike (hoher Schaden. Setzt verursachten Schaden von physisch zu magisch und vice versa. Sollte der Schaden bereits auf magisch eingestellt sein- verursacht Shadow Strike Bonusschaden und kostet keine Energy)
             4 -> Tricks of the trade (geringer Schaden. Reduziert den threat des Rogues und erhöht den threat des Tanks)
+            5 -> Inventory 
             -------------------------------------------------------------------------------------------------------------------------------------------------------
         """.trimIndent()
         )
@@ -203,15 +205,14 @@ fun main() {
             hero1.threat += 20
             println("${boss.name} hat noch ${boss.hp} übrig.")
             println("neuer Bedrohungswert des Tanks: ${hero1.threat}. Neuer Bedrohungswert des Schurken: ${hero2.threat} ")
-            /*else if (rogueInput == 5) {
-            hero2.inventory()
-        }*/
+        } else if (warriorInput == 5) {
+            hero2.useInventory()
 
         } else {
             rogueInput = null
         }
         println("${hero3.name}: ${hero3.hp} HP / ${hero3.manaOrRecource} Mana / ${hero3.threat} Bedrohung")
-        Thread.sleep(1000)
+        //Thread.sleep(1000)
         println("Wähle eine Priest Aktion aus...")
         println(
             """
@@ -220,6 +221,7 @@ fun main() {
             2 -> Fade (reduziert den threat des Priesters auf 0)
             3 -> Flash Heal (wählt ein Gruppenmitglied aus. Das gewählte Ziel erhält 500 HP.)
             4 -> Dispel (entfernt einen damage over time Effekt von dem gewählten Ziel)
+            5 -> Inventory 
             -------------------------------------------------------------------------------------------------------------------------------------------------------
         """.trimIndent()
         )
@@ -233,8 +235,9 @@ fun main() {
             spAction3()
         } else if (priestInput == 4) {
             spAction4()
-        } else {
-            priestInput = null
+        } else if (priestInput == 5) {
+            hero3.useInventory()
+            //priestInput = null
         }
         if (hero2.manaOrRecource < 150) {
             hero2.manaOrRecource += 10 // Schurken Energie wird jede Runde erhöht wenn Sie nicht bereits ihr maximum von 150 erreicht hat
@@ -271,7 +274,7 @@ fun main() {
             println("Geist freilassen")
         }
         println("Ragnaros: LASS MICH NACHDENKEN!!")
-        Thread.sleep(2000)
+        //Thread.sleep(2000)
         println("------------------------------------------------------------------------------------------------------------------------------------------------------")
         bossAttacke(chooseTarget()) // Regulärer Boss move
         extraMove() // 10% chance auf einen weiteren move
