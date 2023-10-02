@@ -173,7 +173,7 @@ fun main() {
         } else if (warriorInput == 5) {
             hero1.useInventory()
         }
-        //  warriorInput = null
+        // warriorInput = null
 
 
         //Bedingungen für das abschliessen des Spiels
