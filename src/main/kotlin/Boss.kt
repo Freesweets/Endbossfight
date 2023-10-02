@@ -8,6 +8,7 @@ class Boss(
 ) : Enemy(hp, strg, int, agi, name) {
     var empoweredSulfuras = false
     var abgetaucht = false
+    var summonedAdd = false
     override fun enemyAction1(hero: Hero) { //Simple damage Action die einen damage over time Effekt hinterlässt
         val attackName = "Lava Burst"
         var lavaBurst = 1..5

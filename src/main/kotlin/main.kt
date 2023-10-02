@@ -93,7 +93,6 @@ fun main() {
         }
     }
 
-
     fun bossAttackRandom(): (Hero) -> Any { //greift auf eine zufällige Aktion des Bosses zu und führt diese aus
         var action = boss.bossActionList.random()
         return action
@@ -111,6 +110,11 @@ fun main() {
          Test Schleife- Danke Okan!
          */
         return target
+    }
+    fun summonAdd() {
+        var add = Add(100.0, 3,3,3,"Explosive Elemental", false)
+        add.attack(chooseTarget())
+        println("Ein ${add.name} wurde beschworen")
     }
 
     var bossAttacke = bossAttackRandom()
@@ -272,6 +276,9 @@ fun main() {
         if (hero1.hp <= 0 || hero2.hp <= 0 || hero3.hp <= 0) { // Bedingungen für eine Niederlage
             gameOver = true
             println("Geist freilassen")
+        }
+        if (round == 2 || round == 4 || round ==  6 || round == 8 || round ==  9 || round == 10 ){
+        summonAdd()
         }
         println("Ragnaros: LASS MICH NACHDENKEN!!")
         //Thread.sleep(2000)
