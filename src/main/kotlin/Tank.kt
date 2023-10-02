@@ -62,22 +62,30 @@ class Tank(
     }
 
    override fun useInventory() {
-        var input = readln().toIntOrNull()
+        println("""
+            Welchen Trank möchtest du benutzen?
+            1 -> Health Potion (erhöht deine Lebenspunkte permanent um 500)
+            2 -> STRG Potion (erhöht deine Stärke permanent um 50)
+            3 -> AGI Potion (erhöht deine Beweglichkeit permanent um 50)
+            4 -> INT Potion (erhöht deine Intelligenz permanent um 50)
+            Nach benutzung eines Trankes verschwindet dieser aus deinem Inventar!
+        """.trimIndent())
+       var input = readln().toIntOrNull()
         when (input) {
             1 -> {
                 if ("Health Potion" in inventoryList) {
+                    println("$name hat seine Lebenspunkte permanent um 500 erhöht!")
                     hp += 500
                     inventoryList.removeAt(0)
-                    println("$name hat seine Lebenspunkte permanent um 500 erhöht!")
                 } else println("Keine Health Potions mehr übrig...")
 
             }
 
             2 -> {
                 if ("STRG Potion" in inventoryList) {
+                    println("$name hat seine Stärke permanent um 50 erhöht!")
                     strg += 50
                     inventoryList.removeAt(1)
-                    println("$name hat seine Stärke permanent um 50 erhöht!")
                 } else println("Keine STRG Potions mehr übrig...")
 
             }
@@ -92,9 +100,9 @@ class Tank(
 
             4 -> {
                 if ("INT Potion" in inventoryList) {
+                    println("$name hat seine Intelligenz permanent um 50 erhöht!")
                     int += 50
                     inventoryList.removeAt(3)
-                    println("$name hat seine Intelligenz permanent um 50 erhöht!")
                 } else println("Keine INT Potions mehr übrig...")
 
             }
