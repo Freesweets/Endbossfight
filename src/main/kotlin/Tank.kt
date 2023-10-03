@@ -21,6 +21,7 @@ class Tank(
     threat,
     dotActive
 ) {
+    override var inventoryList: MutableList<String> = mutableListOf("Health Potion", "STRG Potion", "AGI Potion", "INT Potion")
     override fun tankAction1() { // threat increase Ability
         val attackName = "Taunt"
         threat += 100 // setzt threat des Heros auf 100
@@ -64,7 +65,7 @@ class Tank(
     override fun useInventory() {
         println(
             """
-            Welchen Trank möchtest du benutzen?
+            Welchen Trank möchtest du benutzen? (Tank Inventar)
             1 -> Health Potion (erhöht deine Lebenspunkte permanent um 500)
             2 -> STRG Potion (erhöht deine Stärke permanent um 50)
             3 -> AGI Potion (erhöht deine Beweglichkeit permanent um 50)

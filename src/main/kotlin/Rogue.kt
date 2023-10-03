@@ -22,6 +22,7 @@ class Rogue(
     threat,
     dotActive
 ) {
+    override var inventoryList: MutableList<String> = mutableListOf("Health Potion", "STRG Potion", "AGI Potion", "INT Potion")
     var ssUsed: Boolean =
         false // ein boolinischer Wert der besagt ob die Ability "Sinister Stike" eingesetzt wurde oder nicht. Default false
 
@@ -110,7 +111,7 @@ class Rogue(
     override fun useInventory() {
         println(
             """
-            Welchen Trank möchtest du benutzen?
+            Welchen Trank möchtest du benutzen? (Rogue Inventar)
             1 -> Health Potion (erhöht deine Lebenspunkte permanent um 500)
             2 -> STRG Potion (erhöht deine Stärke permanent um 50)
             3 -> AGI Potion (erhöht deine Beweglichkeit permanent um 50)

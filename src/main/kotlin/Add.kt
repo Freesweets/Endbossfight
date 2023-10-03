@@ -14,8 +14,8 @@ open class Add(
         explosive = randomList.random()
         if (explosive == true){
             hp = 0.0
-            hero.hp -= 350
-            println("$name verursacht 350 Schaden an allen Helden")
+            hero.hp -= 450
+            println("$name verursacht 450 Schaden an ${hero.name}")
         }
 
     }

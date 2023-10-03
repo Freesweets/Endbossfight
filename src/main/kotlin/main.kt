@@ -1,4 +1,3 @@
-var inventoryList: MutableList<String> = mutableListOf("Health Potion", "STRG Potion", "AGI Potion", "INT Potion")
 fun main() {
 
     var hero1: Tank = Tank(
@@ -48,6 +47,14 @@ fun main() {
         420,
         "Ragnaros the Firelord",
         0
+    )
+    var add: Add = Add(
+        100.0,
+        3,
+        3,
+        3,
+        "Explosive Elemental",
+        false
     )
     var group: MutableList<Hero> = mutableListOf(hero1, hero2, hero3)
     var round = 1
@@ -111,10 +118,9 @@ fun main() {
          */
         return target
     }
+
     fun summonAdd() {
-        var add = Add(100.0, 3,3,3,"Explosive Elemental", false)
-        add.attack(chooseTarget())
-        println("Ein ${add.name} wurde beschworen")
+
     }
 
     var bossAttacke = bossAttackRandom()
@@ -148,7 +154,7 @@ fun main() {
     //Thread.sleep(3000)
 
     while (gameOver == false) { //readln Optionen für den Spieler
-        println("${hero1.name}: ${hero1.hp} HP / ${hero1.manaOrRecource} Wut / ${hero1.threat} Bedrohung")
+        println("${hero1.name}: ${hero1.hp} HP / ${hero1.manaOrRecource} Wut / ${hero1.threat} Bedrohung / ${hero1.strg} Stärke / ${hero1.agi} Beweglichkeit / ${hero1.int} Intelligenz")
         println("Wähle eine Tank Aktion aus...")
         var warriorInput: Int? = null
         println(
@@ -176,12 +182,13 @@ fun main() {
             println("${boss.name} hat noch ${boss.hp} übrig.")
         } else if (warriorInput == 5) {
             hero1.useInventory()
+        } else {
+            warriorInput = null
         }
-        // warriorInput = null
 
 
         //Bedingungen für das abschliessen des Spiels
-        println("${hero2.name}: ${hero2.hp} HP / ${hero2.manaOrRecource} Energie / ${hero2.threat} Bedrohung")
+        println("${hero2.name}: ${hero2.hp} HP / ${hero2.manaOrRecource} Energie / ${hero2.threat} Bedrohung / ${hero2.strg} Stärke / ${hero2.agi} Beweglichkeit / ${hero2.int} Intelligenz")
         println("Wähle eine Rogue Aktion aus...")
         println(
             """
@@ -215,7 +222,7 @@ fun main() {
         } else {
             rogueInput = null
         }
-        println("${hero3.name}: ${hero3.hp} HP / ${hero3.manaOrRecource} Mana / ${hero3.threat} Bedrohung")
+        println("${hero3.name}: ${hero3.hp} HP / ${hero3.manaOrRecource} Mana / ${hero3.threat} Bedrohung / ${hero1.strg} Stärke / ${hero1.agi} Beweglichkeit / ${hero1.int} Intelligenz")
         //Thread.sleep(1000)
         println("Wähle eine Priest Aktion aus...")
         println(
@@ -277,8 +284,12 @@ fun main() {
             gameOver = true
             println("Geist freilassen")
         }
-        if (round == 2 || round == 4 || round ==  6 || round == 8 || round ==  9 || round == 10 ){
-        summonAdd()
+        if (round == 2 && add.hp > 0 || round == 4 && add.hp > 0 || round == 6 && add.hp > 0 || round == 8 && add.hp > 0 || round == 9 && add.hp > 0 || round == 10 && add.hp > 0) {
+            add.attack(chooseTarget())
+        }
+        else if (round == 4 && add.hp <= 0 || round == 6 && add.hp <= 0 || round == 8 && add.hp <= 0 || round == 9 && add.hp <= 0 || round == 10 && add.hp <= 0){
+            add.hp = 100.0
+            add.attack(chooseTarget())
         }
         println("Ragnaros: LASS MICH NACHDENKEN!!")
         //Thread.sleep(2000)

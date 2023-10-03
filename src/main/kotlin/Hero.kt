@@ -95,9 +95,7 @@ open class Hero(
         println("$name setzt $attacke4 ein und fügt Ragnaros $dmg zu!")
         return dmg
     }
-
-    //open var inventoryList: MutableList<String> = mutableListOf("Health Potion", "STRG Potion", "AGI Potion", "INT Potion")
-
+    open var inventoryList: MutableList<String> = mutableListOf("Health Potion", "STRG Potion", "AGI Potion", "INT Potion")
     open fun useInventory() {
         var input = readln().toInt()
         when (input) {

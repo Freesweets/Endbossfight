@@ -11,7 +11,7 @@ class Boss(
     var summonedAdd = false
     override fun enemyAction1(hero: Hero) { //Simple damage Action die einen damage over time Effekt hinterlässt
         val attackName = "Lava Burst"
-        var lavaBurst = 1..5
+        var lavaBurst = 3..6
         var dmg = (lavaBurst.random() * int)
         recource += 15 //nach einsatz der Ability wird die Recource um 15 erhöht
         println("Ragnaros setzt $attackName ein und fügt damit ${hero.name} $dmg Schaden zu. Der Held erleidet jede Runde Schaden")
@@ -22,7 +22,7 @@ class Boss(
     override fun enemyAction2(hero: Hero) {
         val attackName = "Blast Wave"
         var blastWave = 3..8
-        var dmg = (blastWave.random() * int) / 2
+        var dmg = (blastWave.random() * int)
         recource += 10
         println("Ragnaros setzt $attackName ein und fügt damit ${hero.name} $dmg Schaden zu")
         hero.hp -= dmg
